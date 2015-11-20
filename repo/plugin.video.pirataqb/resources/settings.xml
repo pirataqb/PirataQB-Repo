@@ -1,0 +1,6 @@
+﻿<settings>
+  <category label="Defenições">
+    <setting id="Tp Vista" type="select" label="Tipo de Vista" values="Miniatura|Amplo|Lista Grande|Lista" default="Miniatura" />
+	<setting id="ntb" type="select" label="Browser do Openload (Windows)" values="Mozilla Firefox|Google Chrome" default="Mozilla Firefox" />
+  </category>
+</settings>
