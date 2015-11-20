@@ -4,11 +4,5 @@
  <info compressed="false">https://raw.githubusercontent.com/pirataqb/PirataQB-Repo/master/Repo_Structure.xml</info>
  <checksum>https://raw.githubusercontent.com/pirataqb/PirataQB-Repo/master/Repo_Structure.xml.md5</checksum>
  <datadir zip="true">https://raw.githubusercontent.com/pirataqb/PirataQB-Repo/master/repo/</datadir> 
- </extension>
- <extension point="xbmc.addon.metadata">
-		<summary>Repo</summary>
-		<description>Repo</description>    
-		<disclaimer></disclaimer>
-	<platform>all</platform>    
-</extension>     
+ </extension> 
 </addon>
