@@ -7,8 +7,8 @@
  </extension>
  <extension point="xbmc.addon.metadata">
 		<summary>Repo</summary>
-		<description></description>    
-		<disclaimer></disclaimer>
+		<description> </description>    
+		<disclaimer> </disclaimer>
 	<platform>all</platform>    
 </extension>     
 </addon>
