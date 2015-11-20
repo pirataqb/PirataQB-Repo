@@ -1,8 +1,12 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?> <addon id="cloister.repository" name="cloister.repository" version="1.0.0" provider-name="cl0ister">
- <extension point="xbmc.addon.repository" name="Cl0ister Repo">
- <info compressed="false">https://raw.githubusercontent.com/Cl0ister/Cl0ister/master/addons.xml</info>   <checksum>https://raw.githubusercontent.com/Cl0ister/Cl0ister/master/addons.xml.md5</checksum>
- <datadir zip="true">https://raw.githubusercontent.com/Cl0ister/Cl0ister/master/repo/</datadir> </extension>    <extension point="xbmc.addon.metadata">
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?> <addon id="pirataqb.repository" name="Pirataqb Repo" version="1.0.0" provider-name="Ricardo Boavida">
+ <extension point="xbmc.addon.repository" name="Repo do Pirataqb">
+ <info compressed="false">https://raw.githubusercontent.com/Cl0ister/Cl0ister/master/addons.xml</info>
+ <checksum>https://raw.githubusercontent.com/Cl0ister/Cl0ister/master/addons.xml.md5</checksum>
+ <datadir zip="true">https://raw.githubusercontent.com/Cl0ister/Cl0ister/master/repo/</datadir> 
+ </extension><extension point="xbmc.addon.metadata">
 		<summary>Repo</summary>
-		<description></description>    <disclaimer></disclaimer>
-	<platform>all</platform>     </extension>     
+		<description></description>    
+		<disclaimer></disclaimer>
+	<platform>all</platform>    
+</extension>     
 </addon>
