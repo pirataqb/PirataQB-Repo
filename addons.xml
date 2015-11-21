@@ -28,15 +28,14 @@
     <import addon="script.module.youtube.dl" optional="true"/>
     <import addon="plugin.video.youtube" />
     <import addon="script.module.urlresolver" optional="false"/>
-    <import addon="script.module.simplejson" /> 
+    <import addon="script.module.simplejson" />   
   </requires>
-  <extension point="xbmc.python.pluginsource"
-            library="default.py">
-        <provides>video</provides>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary>Um Addon para disfrutar dos melhores filmes no Kodi</summary>
-    <description>PirataQB</description>
+    <summary>Um Addon do Pirataqb, para ver os melhores Filmes no Kodi.</summary>
+    <description>Este Addon foi criado pela equipa QB para que todos possam disfrutar do seu conteudo.</description>
     <platform>all</platform>
   </extension>
 </addon>
