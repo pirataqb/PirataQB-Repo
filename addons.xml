@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="pirataqb.repository" name="Pirataqb Repo" version="1.0.0" provider-name="Ricardo Boavida">
+<addon id="pirataqb.repository" name="pirataqb.repository" version="1.0.0" provider-name="Ricardo Boavida">
  <extension point="xbmc.addon.repository" name="Repo do Pirataqb">
  <info compressed="false">https://raw.githubusercontent.com/pirataqb/PirataQB-Repo/master/addons.xml</info>
  <checksum>https://raw.githubusercontent.com/pirataqb/PirataQB-Repo/master/addons.xml.md5</checksum>
@@ -18,7 +18,7 @@
        version="0.0.0"
        provider-name="Ricardo Boavida">
   <requires>
-     <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.beautifulsoup" version="3.2.1"/>
     <import addon="script.module.simple.downloader" version="0.9.4"/>
     <import addon="script.module.beautifulsoup4" />
