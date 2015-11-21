@@ -14,7 +14,7 @@
 </extension>     
 </addon>
 <addon id="plugin.video.pirataqb"
-       name="Pirataqb"
+       name="plugin.video.pirataqb"
        version="0.0.0"
        provider-name="Ricardo Boavida">
   <requires>

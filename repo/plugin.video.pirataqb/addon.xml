@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.pirataqb"
-       name="Pirataqb"
+       name="plugin.video.pirataqb"
        version="0.0.0"
        provider-name="Ricardo Boavida">
   <requires>
