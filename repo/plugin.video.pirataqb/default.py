@@ -362,7 +362,7 @@ def resolving_OpenLoad(url):
     li = re.compile('src="(.+?)"').findall(browser.page_source.encode("utf-8"))
     for i in range(len(li)):
         if li[i].startswith("https://openload"):
-            MasterURL = li[i].split('?')[0]
+            MasterURL = li[i]
     browser.quit()
     return MasterURL
 

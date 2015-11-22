@@ -15,7 +15,7 @@
 </addon>
 <addon id="plugin.video.pirataqb"
        name="Pirataqb"
-       version="0.0.4"
+       version="0.0.5"
        provider-name="Ricardo Boavida">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
