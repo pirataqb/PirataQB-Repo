@@ -78,7 +78,7 @@ if "nt" in OS:
 
 if OS == "Windows":
     if len(xbmcplugin.getSetting(int(sys.argv[1]),'ntb')) > 1:
-        if "Google Chrome" in xbmcplugin.getSetting(int(sys.argv[1]),'ntb') and os.path.isfile(profile+'\DUMP') == False:
+        if os.path.isfile(profile+'\DUMP') == False:
             dialog = xbmcgui.Dialog()
             ok = dialog.ok('PirataQB', 'Caso não tenha instalado o Google Chrome, aconcelhamos que o instale para o bom funcionamento do Script.')
             file = open(profile+'\DUMP', "w")
@@ -344,11 +344,11 @@ def resolving_OpenLoad(url):
     file = open(profile+'\OpenloadBrowser', 'r')
     BO = file.readline()
     if "Mozilla Firefox" in BO:
-        from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+        #from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
         ffprofile = webdriver.FirefoxProfile()
         ffprofile.add_extension(extension=home+'\selenium\webdriver\_adblock_plus.xpi')
-        binary = FirefoxBinary(home+"\selenium\webdriver\Mozilla Firefox\_firefox.exe")#'C:\Python27\Mozilla Firefox\Firefox.exe')
-        browser = webdriver.Firefox(firefox_binary=binary,firefox_profile=ffprofile)
+        #binary = FirefoxBinary(home+"\selenium\webdriver\Mozilla Firefox\_firefox.exe")#'C:\Python27\Mozilla Firefox\Firefox.exe')
+        browser = webdriver.Firefox(firefox_profile=ffprofile) #firefox_binary=binary
     elif "Google Chrome" in BO:
         chop = webdriver.ChromeOptions()
         chop.add_extension(home+"\selenium\webdriver\chrome\Wadblockplus.crx")
