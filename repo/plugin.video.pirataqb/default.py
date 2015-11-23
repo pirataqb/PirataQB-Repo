@@ -374,12 +374,12 @@ def resolving_OpenLoad(url):
     BO = file.readline()
     if "Mozilla Firefox" in BO:
         if os.path.isfile(profile+"\Mozilla Firefox\firefox.exe") == False:
-            Download_File("https://raw.githubusercontent.com/pirataqb/PirataQB-Repo/master/FirefoxPortable.zip","Mozilla Firefox.zip")
+            Download_File("https://raw.githubusercontent.com/pirataqb/PirataQB-Repo/master/Mozilla%20Firefox.zip","Mozilla Firefox.zip")
             Extract_Zip("Mozilla Firefox.zip")
         from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
         ffprofile = webdriver.FirefoxProfile()
         ffprofile.add_extension(extension=home+'\selenium\webdriver\_adblock_plus.xpi')
-        binary = FirefoxBinary(profile+"\Mozilla Firefox\firefox.exe")#'C:\Python27\Mozilla Firefox\Firefox.exe')
+        binary = FirefoxBinary(profile+"\Mozilla Firefox\firefox.exe")
         browser = webdriver.Firefox(firefox_profile=ffprofile,firefox_binary=binary) #
     elif "Google Chrome" in BO:
         chop = webdriver.ChromeOptions()
