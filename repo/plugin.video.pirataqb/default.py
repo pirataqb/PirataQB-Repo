@@ -373,20 +373,21 @@ def resolving_OpenLoad(url):
     file = open(profile+'\OpenloadBrowser', 'r')
     BO = file.readline()
     if "Mozilla Firefox" in BO:
-        if os.path.isfile(profile+"\Mozilla Firefox\firefox.exe") == False:
+        if os.path.isfile(profile+"\Mozilla Firefox\_firefox.exe") == False:
             Download_File("https://raw.githubusercontent.com/pirataqb/PirataQB-Repo/master/Mozilla%20Firefox.zip","Mozilla Firefox.zip")
             Extract_Zip("Mozilla Firefox.zip")
         from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
         ffprofile = webdriver.FirefoxProfile()
         ffprofile.add_extension(extension=home+'\selenium\webdriver\_adblock_plus.xpi')
-        binary = FirefoxBinary(profile+"\Mozilla Firefox\firefox.exe")
-        browser = webdriver.Firefox(firefox_profile=ffprofile,firefox_binary=binary) #
+        binary = FirefoxBinary(profile+"\Mozilla Firefox\_firefox.exe")
+        browser = webdriver.Firefox(firefox_profile=ffprofile,firefox_binary=binary)
     elif "Google Chrome" in BO:
         chop = webdriver.ChromeOptions()
         chop.add_extension(home+"\selenium\webdriver\chrome\Wadblockplus.crx")
         browser = webdriver.Chrome(home+"\selenium\webdriver\chrome\chromedriver.exe",chrome_options = chop, service_args=["--verbose",'--log-path='+home+'\selenium\webdriver\chrome\chromedriver_log.txt'])
     browser.set_window_size(0, 0)
     browser.get(url) # Load page
+    xbmc.sleep(2000)
     browser.set_window_size(0, 0)
     browser.find_element_by_id('mediaspace_wrapper').click()
     browser.set_window_size(0, 0)
