@@ -54,7 +54,9 @@ icon_MenuGeneros_animacao = os.path.join(home+"\Icons\MenuGeneros",'animacao.png
 icon_MenuGeneros_animacaoPT = os.path.join(home+"\Icons\MenuGeneros",'animacaopt.png')
 icon_MenuGeneros_biografia = os.path.join(home+"\Icons\MenuGeneros",'biografia.png')
 icon_MenuGeneros_comedia = os.path.join(home+"\Icons\MenuGeneros",'comedia.png')
+icon_MenuGeneros_crime = os.path.join(home+"\Icons\MenuGeneros",'crime.png')
 icon_MenuGeneros_desporto = os.path.join(home+"\Icons\MenuGeneros",'desporto.png')
+icon_MenuGeneros_documentario = os.path.join(home+"\Icons\MenuGeneros",'documentario.png')
 icon_MenuGeneros_drama = os.path.join(home+"\Icons\MenuGeneros",'drama.png')
 icon_MenuGeneros_familiar = os.path.join(home+"\Icons\MenuGeneros",'familiar.png')
 icon_MenuGeneros_fantasia = os.path.join(home+"\Icons\MenuGeneros",'fantasia.png')
@@ -80,7 +82,7 @@ if OS == "Windows":
     if len(xbmcplugin.getSetting(int(sys.argv[1]),'ntb')) > 1:
         if os.path.isfile(profile+'\DUMP') == False:
             dialog = xbmcgui.Dialog()
-            ok = dialog.ok('PirataQB', 'Caso não tenha instalado o Google Chrome, aconcelhamos que o instale para o bom funcionamento do Script.')
+            ok = dialog.ok('PirataQB', 'Caso não tenha instalado o Browser Predefenido, aconcelhamos que o instale para o bom funcionamento do Script.')
             file = open(profile+'\DUMP', "w")
             file.write("0")
             file.close()
@@ -88,12 +90,39 @@ if OS == "Windows":
         file.write(xbmcplugin.getSetting(int(sys.argv[1]),'ntb'))
         file.close()
 
-
-
-
 def addon_log(string):
     xbmc.log("[addon.pirataqb-%s]: %s" %(addon_version, string))
 
+def Download_File(URL,Name,Profile_Dir=True):
+    import urllib2
+    PRO = xbmcgui.DialogProgress()
+    PRO.create('Aguarde', 'A Iniciar o Download')
+    url = URL
+    file_name = Name
+    u = urllib2.urlopen(url)
+    f = open(profile+'\\'+ file_name, 'wb')
+    meta = u.info()
+    file_size = int(meta.getheaders("Content-Length")[0])
+
+    file_size_dl = 0
+    block_sz = 8192
+    while True:
+        buffer = u.read(block_sz)
+        if not buffer:
+            break
+        file_size_dl += len(buffer)
+        f.write(buffer)
+        status = (file_size_dl * 100 / file_size)
+        PRO.update(int(status), "", "A descarregar "+Name+" ...", "")
+    f.close()
+
+def Extract_Zip(File_Name,Delete_Original=True,Profile_Dir=True):
+    import zipfile
+    path = profile+'\\'+ File_Name
+    with zipfile.ZipFile(path, "r") as z:
+        z.extractall(profile+"\\")
+    if Delete_Original == True:
+        os.remove(path)
 
 def makeRequest(url, headers=None):
         try:
@@ -344,10 +373,13 @@ def resolving_OpenLoad(url):
     file = open(profile+'\OpenloadBrowser', 'r')
     BO = file.readline()
     if "Mozilla Firefox" in BO:
+        if os.path.isfile(profile+"\FirefoxPortable\FirefoxPortable.exe") == False:
+            Download_File("https://raw.githubusercontent.com/pirataqb/PirataQB-Repo/master/FirefoxPortable.zip","Firefox_Portable.zip")
+            Extract_Zip("Firefox_Portable.zip")
         from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
         ffprofile = webdriver.FirefoxProfile()
         ffprofile.add_extension(extension=home+'\selenium\webdriver\_adblock_plus.xpi')
-        binary = FirefoxBinary("C:\Program Files (x86)\Mozilla Firefox\firefox.exe")#'C:\Python27\Mozilla Firefox\Firefox.exe')
+        binary = FirefoxBinary(profile+"\FirefoxPortable\FirefoxPortable.exe")#'C:\Python27\Mozilla Firefox\Firefox.exe')
         browser = webdriver.Firefox(firefox_profile=ffprofile,firefox_binary=binary) #
     elif "Google Chrome" in BO:
         chop = webdriver.ChromeOptions()
@@ -515,25 +547,25 @@ elif mode==1: # Pesquisar
 elif mode==2: # Separador Generos
     addFolder("[COLOR=red]Aç[COLOR=blue]ão[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/acao/",icon_MenuGeneros_acao)
     addFolder("[COLOR=red]Aven[COLOR=blue]tura[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/aventura/",icon_MenuGeneros_aventura)
-    addFolder("[COLOR=red]Ani[COLOR=blue]mação[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/animacao/",icon_MenuGeneros_animacao)
-    addFolder("[COLOR=red]Ani[COLOR=blue]mação (PT-PT)[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/animacao-em-portugues/",icon_MenuGeneros_animacaoPT)
-    addFolder("[COLOR=red]Bio[COLOR=blue]grafia[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/biografia/",icon_MenuGeneros_biografia)
+    addFolder("[COLOR=red]Anima[COLOR=blue]ção[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/animacao/",icon_MenuGeneros_animacao)
+    addFolder("[COLOR=red]Animação [COLOR=blue](PT-PT)[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/animacao-em-portugues/",icon_MenuGeneros_animacaoPT)
+    addFolder("[COLOR=red]Biogra[COLOR=blue]fia[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/biografia/",icon_MenuGeneros_biografia)
     addFolder("[COLOR=red]Comé[COLOR=blue]dia[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/comedia/",icon_MenuGeneros_comedia)
-    addFolder("[COLOR=red]Cri[COLOR=blue]me[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/crime/",icon_MenuGeneros_comedia)
-    addFolder("[COLOR=red]Des[COLOR=blue]porto[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/desporto/",icon_MenuGeneros_desporto)
-    addFolder("[COLOR=red]Docu[COLOR=blue]mentário[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/documentario/",icon_MenuGeneros_desporto)
+    addFolder("[COLOR=red]Cri[COLOR=blue]me[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/crime/",icon_MenuGeneros_crime)
+    addFolder("[COLOR=red]Despor[COLOR=blue]to[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/desporto/",icon_MenuGeneros_desporto)
+    addFolder("[COLOR=red]Documen[COLOR=blue]tário[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/documentario/",icon_MenuGeneros_documentario)
     addFolder("[COLOR=red]Dra[COLOR=blue]ma[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/drama/",icon_MenuGeneros_drama)
     addFolder("[COLOR=red]Fami[COLOR=blue]liar[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/familiar/",icon_MenuGeneros_familiar)
-    addFolder("[COLOR=red]Fan[COLOR=blue]tasia[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/fantasia/",icon_MenuGeneros_fantasia)
+    addFolder("[COLOR=red]Fanta[COLOR=blue]sia[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/fantasia/",icon_MenuGeneros_fantasia)
     addFolder("[COLOR=red]Gue[COLOR=blue]rra[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/guerra/",icon_MenuGeneros_guerra)
     addFolder("[COLOR=red]Histó[COLOR=blue]ria[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/historia/",icon_MenuGeneros_historia)
     addFolder("[COLOR=red]Misté[COLOR=blue]rio[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/misterio/",icon_MenuGeneros_misterio)
     addFolder("[COLOR=red]Musi[COLOR=blue]cal[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/musical/",icon_MenuGeneros_musical)
-    addFolder("[COLOR=red]Portu[COLOR=blue]gês - Brasileiro[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/portugues-brasileiro/",icon_MenuGeneros_PT_BR)
+    addFolder("[COLOR=red]Portugês -[COLOR=blue] Brasileiro[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/portugues-brasileiro/",icon_MenuGeneros_PT_BR)
     addFolder("[COLOR=red]Roman[COLOR=blue]ce[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/romance/",icon_MenuGeneros_romance)
-    addFolder("[COLOR=red]Te[COLOR=blue]rror[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/terror/",icon_MenuGeneros_terror)
+    addFolder("[COLOR=red]Terr[COLOR=blue]or[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/terror/",icon_MenuGeneros_terror)
     addFolder("[COLOR=red]Thri[COLOR=blue]ller[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/thriller/",icon_MenuGeneros_thriller)
-    addFolder("[COLOR=red]Wes[COLOR=blue]tern[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/western/",icon_MenuGeneros_western)
+    addFolder("[COLOR=red]West[COLOR=blue]ern[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/western/",icon_MenuGeneros_western)
 
 elif mode==19: # Reproduzir
     Progresso_File.create('Aguarde', 'A Processar o Link.')
