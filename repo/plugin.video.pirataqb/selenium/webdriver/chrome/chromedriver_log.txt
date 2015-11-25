@@ -1,4 +1,4 @@
-[0.362][INFO]: COMMAND InitSession {
+[0.409][INFO]: COMMAND InitSession {
    "desiredCapabilities": {
       "browserName": "chrome",
       "chromeOptions": {
@@ -10,7 +10,7 @@
       "version": ""
    }
 }
-[0.366][INFO]: Populating Preferences file: {
+[0.413][INFO]: Populating Preferences file: {
    "alternate_error_pages": {
       "enabled": false
    },
@@ -61,7 +61,7 @@
       "enabled": false
    }
 }
-[0.367][INFO]: Populating Local State file: {
+[0.414][INFO]: Populating Local State file: {
    "background_mode": {
       "enabled": false
    },
@@ -71,163 +71,170 @@
       }
    }
 }
-[0.829][INFO]: Launching chrome: "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-background-networking --disable-client-side-phishing-detection --disable-component-update --disable-default-apps --disable-hang-monitor --disable-prompt-on-repost --disable-sync --disable-web-resources --enable-logging --full-memory-crash-report --ignore-certificate-errors --load-extension="C:\Users\Ricardo\AppData\Local\Temp\scoped_dir14816_5328\extension_ldcecbkkoecffmfljeihcmifjjdoepkn,C:\Users\Ricardo\AppData\Local\Temp\scoped_dir14816_5328\internal" --logging-level=1 --metrics-recording-only --no-first-run --password-store=basic --remote-debugging-port=12847 --safebrowsing-disable-auto-update --safebrowsing-disable-download-protection --use-mock-keychain --user-data-dir="C:\Users\Ricardo\AppData\Local\Temp\scoped_dir14816_4566" data:,
-[0.837][DEBUG]: DevTools request: http://127.0.0.1:12847/json/version
-[1.841][DEBUG]: DevTools request failed
-[1.892][DEBUG]: DevTools request: http://127.0.0.1:12847/json/version
-[2.232][DEBUG]: DevTools response: {
+[0.805][INFO]: Launching chrome: "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-background-networking --disable-client-side-phishing-detection --disable-component-update --disable-default-apps --disable-hang-monitor --disable-prompt-on-repost --disable-sync --disable-web-resources --enable-logging --full-memory-crash-report --ignore-certificate-errors --load-extension="C:\Users\Ricardo\AppData\Local\Temp\scoped_dir14288_22540\extension_ldcecbkkoecffmfljeihcmifjjdoepkn,C:\Users\Ricardo\AppData\Local\Temp\scoped_dir14288_22540\internal" --logging-level=1 --metrics-recording-only --no-first-run --password-store=basic --remote-debugging-port=12576 --safebrowsing-disable-auto-update --safebrowsing-disable-download-protection --use-mock-keychain --user-data-dir="C:\Users\Ricardo\AppData\Local\Temp\scoped_dir14288_17223" data:,
+[0.811][DEBUG]: DevTools request: http://127.0.0.1:12576/json/version
+[1.924][DEBUG]: DevTools response: {
    "Browser": "Chrome/46.0.2490.86",
    "Protocol-Version": "1.1",
    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36",
    "WebKit-Version": "537.36 (@e8926f681fbb840b4f389e7e692343d4505722ce)"
 }
 
-[2.232][DEBUG]: DevTools request: http://127.0.0.1:12847/json
-[2.265][DEBUG]: DevTools response: [ {
+[1.924][DEBUG]: DevTools request: http://127.0.0.1:12576/json
+[1.934][DEBUG]: DevTools response: [ {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/6E376A8E-3B16-4F69-85EB-9263484D8F9C",
-   "faviconUrl": "chrome://extension-icon/nkeimhogjdpnpccoofpliimaahmaaome/24/1",
-   "id": "6E376A8E-3B16-4F69-85EB-9263484D8F9C",
-   "title": "Google+ Hangouts",
-   "type": "background_page",
-   "url": "chrome-extension://nkeimhogjdpnpccoofpliimaahmaaome/background.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/6E376A8E-3B16-4F69-85EB-9263484D8F9C"
-}, {
-   "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/3F5C04B4-CA0F-4DC5-B312-748F42BBD514",
-   "id": "3F5C04B4-CA0F-4DC5-B312-748F42BBD514",
-   "title": "",
-   "type": "page",
-   "url": "data:,",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/3F5C04B4-CA0F-4DC5-B312-748F42BBD514"
-} ]
-
-[2.266][INFO]: Waiting for extension bg page load: chrome-extension://ldcecbkkoecffmfljeihcmifjjdoepkn/_generated_background_page.html
-[2.266][DEBUG]: DevTools request: http://127.0.0.1:12847/json
-[2.282][DEBUG]: DevTools response: [ {
-   "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/BF05CC02-B45B-4444-9AA7-F0F4212C9C84",
-   "faviconUrl": "chrome://extension-icon/ennkphjdgehloodpbhlhldgbnhmacadg/24/1",
-   "id": "BF05CC02-B45B-4444-9AA7-F0F4212C9C84",
-   "title": "Settings",
-   "type": "background_page",
-   "url": "chrome-extension://ennkphjdgehloodpbhlhldgbnhmacadg/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/BF05CC02-B45B-4444-9AA7-F0F4212C9C84"
-}, {
-   "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/EBCD1539-A16C-4F04-BD0C-91E12372F46B",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/E2B917A9-24FF-4E1E-AB59-2DA0C7C05EE5",
    "faviconUrl": "chrome://extension-icon/gfdkimpbcpahaombhbimeihdjnejgicl/24/1",
-   "id": "EBCD1539-A16C-4F04-BD0C-91E12372F46B",
+   "id": "E2B917A9-24FF-4E1E-AB59-2DA0C7C05EE5",
    "title": "Feedback",
    "type": "background_page",
    "url": "chrome-extension://gfdkimpbcpahaombhbimeihdjnejgicl/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/EBCD1539-A16C-4F04-BD0C-91E12372F46B"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/E2B917A9-24FF-4E1E-AB59-2DA0C7C05EE5"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/6E376A8E-3B16-4F69-85EB-9263484D8F9C",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/1FAA23EB-0DA0-491D-8C38-CBBDE8F4B100",
    "faviconUrl": "chrome://extension-icon/nkeimhogjdpnpccoofpliimaahmaaome/24/1",
-   "id": "6E376A8E-3B16-4F69-85EB-9263484D8F9C",
+   "id": "1FAA23EB-0DA0-491D-8C38-CBBDE8F4B100",
    "title": "Google+ Hangouts",
    "type": "background_page",
    "url": "chrome-extension://nkeimhogjdpnpccoofpliimaahmaaome/background.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/6E376A8E-3B16-4F69-85EB-9263484D8F9C"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/1FAA23EB-0DA0-491D-8C38-CBBDE8F4B100"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/3F5C04B4-CA0F-4DC5-B312-748F42BBD514",
-   "id": "3F5C04B4-CA0F-4DC5-B312-748F42BBD514",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/BFA80301-4A01-426C-A84D-61C4C6F52C8E",
+   "id": "BFA80301-4A01-426C-A84D-61C4C6F52C8E",
    "title": "",
    "type": "page",
    "url": "data:,",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/3F5C04B4-CA0F-4DC5-B312-748F42BBD514"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/BFA80301-4A01-426C-A84D-61C4C6F52C8E"
 } ]
 
-[2.383][DEBUG]: DevTools request: http://127.0.0.1:12847/json
-[2.458][DEBUG]: DevTools response: [ {
+[1.935][INFO]: Waiting for extension bg page load: chrome-extension://ldcecbkkoecffmfljeihcmifjjdoepkn/_generated_background_page.html
+[1.935][DEBUG]: DevTools request: http://127.0.0.1:12576/json
+[1.973][DEBUG]: DevTools response: [ {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/6F56A9AA-0318-4EB4-8106-8207936A9335",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/068F5BD0-9CB3-4012-9229-7A6E694C5C5F",
+   "faviconUrl": "chrome://extension-icon/ennkphjdgehloodpbhlhldgbnhmacadg/24/1",
+   "id": "068F5BD0-9CB3-4012-9229-7A6E694C5C5F",
+   "title": "Settings",
+   "type": "background_page",
+   "url": "chrome-extension://ennkphjdgehloodpbhlhldgbnhmacadg/_generated_background_page.html",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/068F5BD0-9CB3-4012-9229-7A6E694C5C5F"
+}, {
+   "description": "",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/E2B917A9-24FF-4E1E-AB59-2DA0C7C05EE5",
+   "faviconUrl": "chrome://extension-icon/gfdkimpbcpahaombhbimeihdjnejgicl/24/1",
+   "id": "E2B917A9-24FF-4E1E-AB59-2DA0C7C05EE5",
+   "title": "Feedback",
+   "type": "background_page",
+   "url": "chrome-extension://gfdkimpbcpahaombhbimeihdjnejgicl/_generated_background_page.html",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/E2B917A9-24FF-4E1E-AB59-2DA0C7C05EE5"
+}, {
+   "description": "",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/1FAA23EB-0DA0-491D-8C38-CBBDE8F4B100",
+   "faviconUrl": "chrome://extension-icon/nkeimhogjdpnpccoofpliimaahmaaome/24/1",
+   "id": "1FAA23EB-0DA0-491D-8C38-CBBDE8F4B100",
+   "title": "Google+ Hangouts",
+   "type": "background_page",
+   "url": "chrome-extension://nkeimhogjdpnpccoofpliimaahmaaome/background.html",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/1FAA23EB-0DA0-491D-8C38-CBBDE8F4B100"
+}, {
+   "description": "",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/BFA80301-4A01-426C-A84D-61C4C6F52C8E",
+   "id": "BFA80301-4A01-426C-A84D-61C4C6F52C8E",
+   "title": "",
+   "type": "page",
+   "url": "data:,",
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/BFA80301-4A01-426C-A84D-61C4C6F52C8E"
+} ]
+
+[2.074][DEBUG]: DevTools request: http://127.0.0.1:12576/json
+[2.078][DEBUG]: DevTools response: [ {
+   "description": "",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/95B5DB21-40C7-43B3-A82F-081233665A66",
    "faviconUrl": "chrome://extension-icon/aapnijgdinlhnhlmodcfapnahmbfebeb/24/1",
-   "id": "6F56A9AA-0318-4EB4-8106-8207936A9335",
+   "id": "95B5DB21-40C7-43B3-A82F-081233665A66",
    "title": "Chrome Automation Extension",
    "type": "background_page",
    "url": "chrome-extension://aapnijgdinlhnhlmodcfapnahmbfebeb/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/6F56A9AA-0318-4EB4-8106-8207936A9335"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/95B5DB21-40C7-43B3-A82F-081233665A66"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/95FB395E-B5A3-4765-98B3-A28C5B4F5DBB",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/8D472B1F-7E6E-42AD-955B-CB5456B10CFF",
    "faviconUrl": "chrome://extension-icon/ldcecbkkoecffmfljeihcmifjjdoepkn/24/1",
-   "id": "95FB395E-B5A3-4765-98B3-A28C5B4F5DBB",
+   "id": "8D472B1F-7E6E-42AD-955B-CB5456B10CFF",
    "title": "Adblock Plus development build",
    "type": "background_page",
    "url": "chrome-extension://ldcecbkkoecffmfljeihcmifjjdoepkn/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/95FB395E-B5A3-4765-98B3-A28C5B4F5DBB"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/8D472B1F-7E6E-42AD-955B-CB5456B10CFF"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/40EEDBBD-AB9C-415F-89A6-FF67260AE4C6",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/AECF6836-2EBC-4E8C-B398-627957903C19",
    "faviconUrl": "chrome://extension-icon/kmendfapggjehodndflmmgagdbamhnfd/24/1",
-   "id": "40EEDBBD-AB9C-415F-89A6-FF67260AE4C6",
+   "id": "AECF6836-2EBC-4E8C-B398-627957903C19",
    "title": "CryptoTokenExtension",
    "type": "background_page",
    "url": "chrome-extension://kmendfapggjehodndflmmgagdbamhnfd/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/40EEDBBD-AB9C-415F-89A6-FF67260AE4C6"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/AECF6836-2EBC-4E8C-B398-627957903C19"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/FE74987A-C6EC-460B-9F46-27BD345669B1",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/375029EB-4DDE-4D3E-9130-E564951BD540",
    "faviconUrl": "chrome://extension-icon/neajdppkdcdipfabeoofebfddakdcjhd/24/1",
-   "id": "FE74987A-C6EC-460B-9F46-27BD345669B1",
+   "id": "375029EB-4DDE-4D3E-9130-E564951BD540",
    "title": "Google Network Speech",
    "type": "background_page",
    "url": "chrome-extension://neajdppkdcdipfabeoofebfddakdcjhd/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/FE74987A-C6EC-460B-9F46-27BD345669B1"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/375029EB-4DDE-4D3E-9130-E564951BD540"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/BF05CC02-B45B-4444-9AA7-F0F4212C9C84",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/068F5BD0-9CB3-4012-9229-7A6E694C5C5F",
    "faviconUrl": "chrome://extension-icon/ennkphjdgehloodpbhlhldgbnhmacadg/24/1",
-   "id": "BF05CC02-B45B-4444-9AA7-F0F4212C9C84",
+   "id": "068F5BD0-9CB3-4012-9229-7A6E694C5C5F",
    "title": "Settings",
    "type": "background_page",
    "url": "chrome-extension://ennkphjdgehloodpbhlhldgbnhmacadg/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/BF05CC02-B45B-4444-9AA7-F0F4212C9C84"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/068F5BD0-9CB3-4012-9229-7A6E694C5C5F"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/EBCD1539-A16C-4F04-BD0C-91E12372F46B",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/E2B917A9-24FF-4E1E-AB59-2DA0C7C05EE5",
    "faviconUrl": "chrome://extension-icon/gfdkimpbcpahaombhbimeihdjnejgicl/24/1",
-   "id": "EBCD1539-A16C-4F04-BD0C-91E12372F46B",
+   "id": "E2B917A9-24FF-4E1E-AB59-2DA0C7C05EE5",
    "title": "Feedback",
    "type": "background_page",
    "url": "chrome-extension://gfdkimpbcpahaombhbimeihdjnejgicl/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/EBCD1539-A16C-4F04-BD0C-91E12372F46B"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/E2B917A9-24FF-4E1E-AB59-2DA0C7C05EE5"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/6E376A8E-3B16-4F69-85EB-9263484D8F9C",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/1FAA23EB-0DA0-491D-8C38-CBBDE8F4B100",
    "faviconUrl": "chrome://extension-icon/nkeimhogjdpnpccoofpliimaahmaaome/24/1",
-   "id": "6E376A8E-3B16-4F69-85EB-9263484D8F9C",
+   "id": "1FAA23EB-0DA0-491D-8C38-CBBDE8F4B100",
    "title": "Google+ Hangouts",
    "type": "background_page",
    "url": "chrome-extension://nkeimhogjdpnpccoofpliimaahmaaome/background.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/6E376A8E-3B16-4F69-85EB-9263484D8F9C"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/1FAA23EB-0DA0-491D-8C38-CBBDE8F4B100"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/3F5C04B4-CA0F-4DC5-B312-748F42BBD514",
-   "id": "3F5C04B4-CA0F-4DC5-B312-748F42BBD514",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/BFA80301-4A01-426C-A84D-61C4C6F52C8E",
+   "id": "BFA80301-4A01-426C-A84D-61C4C6F52C8E",
    "title": "",
    "type": "page",
    "url": "data:,",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/3F5C04B4-CA0F-4DC5-B312-748F42BBD514"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/BFA80301-4A01-426C-A84D-61C4C6F52C8E"
 } ]
 
-[2.482][DEBUG]: DEVTOOLS COMMAND DOM.getDocument (id=1) {
+[2.084][DEBUG]: DEVTOOLS COMMAND DOM.getDocument (id=1) {
 
 }
-[2.483][DEBUG]: DEVTOOLS COMMAND Runtime.enable (id=2) {
+[2.084][DEBUG]: DEVTOOLS COMMAND Runtime.enable (id=2) {
 
 }
-[2.483][DEBUG]: DEVTOOLS COMMAND Page.enable (id=3) {
+[2.084][DEBUG]: DEVTOOLS COMMAND Page.enable (id=3) {
 
 }
-[2.483][DEBUG]: DEVTOOLS COMMAND Page.enable (id=4) {
+[2.084][DEBUG]: DEVTOOLS COMMAND Page.enable (id=4) {
 
 }
-[4.592][DEBUG]: DEVTOOLS RESPONSE DOM.getDocument (id=1) {
+[4.032][DEBUG]: DEVTOOLS RESPONSE DOM.getDocument (id=1) {
    "root": {
       "baseURL": "",
       "childNodeCount": 1,
@@ -266,87 +273,87 @@
       "xmlVersion": ""
    }
 }
-[4.592][DEBUG]: DEVTOOLS RESPONSE Runtime.enable (id=2) {
+[4.032][DEBUG]: DEVTOOLS RESPONSE Runtime.enable (id=2) {
 
 }
-[4.592][DEBUG]: DEVTOOLS RESPONSE Page.enable (id=3) {
+[4.032][DEBUG]: DEVTOOLS RESPONSE Page.enable (id=3) {
 
 }
-[4.592][DEBUG]: DEVTOOLS RESPONSE Page.enable (id=4) {
+[4.032][DEBUG]: DEVTOOLS RESPONSE Page.enable (id=4) {
 
 }
-[4.592][DEBUG]: DEVTOOLS COMMAND Page.enable (id=5) {
+[4.032][DEBUG]: DEVTOOLS COMMAND Page.enable (id=5) {
 
 }
-[4.783][DEBUG]: DEVTOOLS EVENT Page.frameNavigated {
+[4.175][DEBUG]: DEVTOOLS EVENT Page.frameNavigated {
    "frame": {
-      "id": "15120.1",
-      "loaderId": "15120.2",
+      "id": "1696.1",
+      "loaderId": "1696.2",
       "mimeType": "text/html",
       "securityOrigin": "chrome-extension://ldcecbkkoecffmfljeihcmifjjdoepkn",
       "url": "chrome-extension://ldcecbkkoecffmfljeihcmifjjdoepkn/_generated_background_page.html"
    }
 }
-[4.783][DEBUG]: DEVTOOLS EVENT Runtime.executionContextCreated {
+[4.175][DEBUG]: DEVTOOLS EVENT Runtime.executionContextCreated {
    "context": {
-      "frameId": "15120.1",
+      "frameId": "1696.1",
       "id": 1,
       "name": "",
       "origin": "chrome-extension://ldcecbkkoecffmfljeihcmifjjdoepkn"
    }
 }
-[4.783][DEBUG]: DEVTOOLS RESPONSE Page.enable (id=5) {
+[4.175][DEBUG]: DEVTOOLS RESPONSE Page.enable (id=5) {
 
 }
-[4.784][INFO]: Waiting for pending navigations...
-[4.784][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=6) {
+[4.175][INFO]: Waiting for pending navigations...
+[4.175][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=6) {
    "expression": "var isLoaded = document.readyState == 'complete' ||    document.readyState == 'interactive';if (isLoaded) {  var frame = document.createElement('iframe');  frame.src = 'about:blank';  document.body..."
 }
-[4.917][DEBUG]: DEVTOOLS EVENT Page.loadEventFired {
-   "timestamp": 496141.917192
+[4.281][DEBUG]: DEVTOOLS EVENT Page.loadEventFired {
+   "timestamp": 602256.561552
 }
-[4.917][DEBUG]: DEVTOOLS EVENT Page.frameStoppedLoading {
-   "frameId": "15120.1"
+[4.281][DEBUG]: DEVTOOLS EVENT Page.frameStoppedLoading {
+   "frameId": "1696.1"
 }
-[4.917][DEBUG]: DEVTOOLS EVENT DOM.documentUpdated {
+[4.281][DEBUG]: DEVTOOLS EVENT DOM.documentUpdated {
 
 }
-[4.917][DEBUG]: DEVTOOLS COMMAND DOM.getDocument (id=7) {
+[4.281][DEBUG]: DEVTOOLS COMMAND DOM.getDocument (id=7) {
 
 }
-[4.917][DEBUG]: DEVTOOLS EVENT Page.domContentEventFired {
-   "timestamp": 496141.917531
+[4.281][DEBUG]: DEVTOOLS EVENT Page.domContentEventFired {
+   "timestamp": 602256.561793
 }
-[4.931][DEBUG]: DEVTOOLS EVENT Page.frameAttached {
-   "frameId": "15120.4",
-   "parentFrameId": "15120.1"
+[4.293][DEBUG]: DEVTOOLS EVENT Page.frameAttached {
+   "frameId": "1696.4",
+   "parentFrameId": "1696.1"
 }
-[4.931][DEBUG]: DEVTOOLS EVENT Page.frameStartedLoading {
-   "frameId": "15120.4"
+[4.293][DEBUG]: DEVTOOLS EVENT Page.frameStartedLoading {
+   "frameId": "1696.4"
 }
-[4.931][DEBUG]: DEVTOOLS EVENT Page.frameNavigated {
+[4.293][DEBUG]: DEVTOOLS EVENT Page.frameNavigated {
    "frame": {
-      "id": "15120.4",
-      "loaderId": "15120.5",
+      "id": "1696.4",
+      "loaderId": "1696.5",
       "mimeType": "text/html",
       "name": "",
-      "parentId": "15120.1",
+      "parentId": "1696.1",
       "securityOrigin": "chrome-extension://ldcecbkkoecffmfljeihcmifjjdoepkn",
       "url": "about:blank"
    }
 }
-[4.931][DEBUG]: DEVTOOLS EVENT Runtime.executionContextCreated {
+[4.293][DEBUG]: DEVTOOLS EVENT Runtime.executionContextCreated {
    "context": {
-      "frameId": "15120.4",
+      "frameId": "1696.4",
       "id": 2,
       "name": "",
       "origin": "chrome-extension://ldcecbkkoecffmfljeihcmifjjdoepkn"
    }
 }
-[4.931][DEBUG]: DEVTOOLS EVENT Page.frameStoppedLoading {
-   "frameId": "15120.4"
+[4.293][DEBUG]: DEVTOOLS EVENT Page.frameStoppedLoading {
+   "frameId": "1696.4"
 }
-[4.931][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=6) {
+[4.293][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=6) {
    "result": {
       "description": "3",
       "type": "number",
@@ -354,7 +361,7 @@
    },
    "wasThrown": false
 }
-[4.940][DEBUG]: DEVTOOLS RESPONSE DOM.getDocument (id=7) {
+[4.300][DEBUG]: DEVTOOLS RESPONSE DOM.getDocument (id=7) {
    "root": {
       "baseURL": "chrome-extension://ldcecbkkoecffmfljeihcmifjjdoepkn/_generated_background_page.html",
       "childNodeCount": 2,
@@ -401,88 +408,88 @@
       "xmlVersion": ""
    }
 }
-[4.940][INFO]: Done waiting for pending navigations
-[4.940][DEBUG]: DevTools request: http://127.0.0.1:12847/json
-[4.946][DEBUG]: DevTools response: [ {
+[4.300][INFO]: Done waiting for pending navigations
+[4.301][DEBUG]: DevTools request: http://127.0.0.1:12576/json
+[4.305][DEBUG]: DevTools response: [ {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/6F56A9AA-0318-4EB4-8106-8207936A9335",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/95B5DB21-40C7-43B3-A82F-081233665A66",
    "faviconUrl": "chrome://extension-icon/aapnijgdinlhnhlmodcfapnahmbfebeb/24/1",
-   "id": "6F56A9AA-0318-4EB4-8106-8207936A9335",
+   "id": "95B5DB21-40C7-43B3-A82F-081233665A66",
    "title": "Chrome Automation Extension",
    "type": "background_page",
    "url": "chrome-extension://aapnijgdinlhnhlmodcfapnahmbfebeb/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/6F56A9AA-0318-4EB4-8106-8207936A9335"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/95B5DB21-40C7-43B3-A82F-081233665A66"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/95FB395E-B5A3-4765-98B3-A28C5B4F5DBB",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/8D472B1F-7E6E-42AD-955B-CB5456B10CFF",
    "faviconUrl": "chrome://extension-icon/ldcecbkkoecffmfljeihcmifjjdoepkn/24/1",
-   "id": "95FB395E-B5A3-4765-98B3-A28C5B4F5DBB",
+   "id": "8D472B1F-7E6E-42AD-955B-CB5456B10CFF",
    "title": "Adblock Plus development build",
    "type": "background_page",
    "url": "chrome-extension://ldcecbkkoecffmfljeihcmifjjdoepkn/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/95FB395E-B5A3-4765-98B3-A28C5B4F5DBB"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/8D472B1F-7E6E-42AD-955B-CB5456B10CFF"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/40EEDBBD-AB9C-415F-89A6-FF67260AE4C6",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/AECF6836-2EBC-4E8C-B398-627957903C19",
    "faviconUrl": "chrome://extension-icon/kmendfapggjehodndflmmgagdbamhnfd/24/1",
-   "id": "40EEDBBD-AB9C-415F-89A6-FF67260AE4C6",
+   "id": "AECF6836-2EBC-4E8C-B398-627957903C19",
    "title": "CryptoTokenExtension",
    "type": "background_page",
    "url": "chrome-extension://kmendfapggjehodndflmmgagdbamhnfd/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/40EEDBBD-AB9C-415F-89A6-FF67260AE4C6"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/AECF6836-2EBC-4E8C-B398-627957903C19"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/FE74987A-C6EC-460B-9F46-27BD345669B1",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/375029EB-4DDE-4D3E-9130-E564951BD540",
    "faviconUrl": "chrome://extension-icon/neajdppkdcdipfabeoofebfddakdcjhd/24/1",
-   "id": "FE74987A-C6EC-460B-9F46-27BD345669B1",
+   "id": "375029EB-4DDE-4D3E-9130-E564951BD540",
    "title": "Google Network Speech",
    "type": "background_page",
    "url": "chrome-extension://neajdppkdcdipfabeoofebfddakdcjhd/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/FE74987A-C6EC-460B-9F46-27BD345669B1"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/375029EB-4DDE-4D3E-9130-E564951BD540"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/BF05CC02-B45B-4444-9AA7-F0F4212C9C84",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/068F5BD0-9CB3-4012-9229-7A6E694C5C5F",
    "faviconUrl": "chrome://extension-icon/ennkphjdgehloodpbhlhldgbnhmacadg/24/1",
-   "id": "BF05CC02-B45B-4444-9AA7-F0F4212C9C84",
+   "id": "068F5BD0-9CB3-4012-9229-7A6E694C5C5F",
    "title": "Settings",
    "type": "background_page",
    "url": "chrome-extension://ennkphjdgehloodpbhlhldgbnhmacadg/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/BF05CC02-B45B-4444-9AA7-F0F4212C9C84"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/068F5BD0-9CB3-4012-9229-7A6E694C5C5F"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/EBCD1539-A16C-4F04-BD0C-91E12372F46B",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/E2B917A9-24FF-4E1E-AB59-2DA0C7C05EE5",
    "faviconUrl": "chrome://extension-icon/gfdkimpbcpahaombhbimeihdjnejgicl/24/1",
-   "id": "EBCD1539-A16C-4F04-BD0C-91E12372F46B",
+   "id": "E2B917A9-24FF-4E1E-AB59-2DA0C7C05EE5",
    "title": "Feedback",
    "type": "background_page",
    "url": "chrome-extension://gfdkimpbcpahaombhbimeihdjnejgicl/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/EBCD1539-A16C-4F04-BD0C-91E12372F46B"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/E2B917A9-24FF-4E1E-AB59-2DA0C7C05EE5"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/6E376A8E-3B16-4F69-85EB-9263484D8F9C",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/1FAA23EB-0DA0-491D-8C38-CBBDE8F4B100",
    "faviconUrl": "chrome://extension-icon/nkeimhogjdpnpccoofpliimaahmaaome/24/1",
-   "id": "6E376A8E-3B16-4F69-85EB-9263484D8F9C",
+   "id": "1FAA23EB-0DA0-491D-8C38-CBBDE8F4B100",
    "title": "Google+ Hangouts",
    "type": "background_page",
    "url": "chrome-extension://nkeimhogjdpnpccoofpliimaahmaaome/background.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/6E376A8E-3B16-4F69-85EB-9263484D8F9C"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/1FAA23EB-0DA0-491D-8C38-CBBDE8F4B100"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/3F5C04B4-CA0F-4DC5-B312-748F42BBD514",
-   "id": "3F5C04B4-CA0F-4DC5-B312-748F42BBD514",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/BFA80301-4A01-426C-A84D-61C4C6F52C8E",
+   "id": "BFA80301-4A01-426C-A84D-61C4C6F52C8E",
    "title": "data:,",
    "type": "page",
    "url": "data:,",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/3F5C04B4-CA0F-4DC5-B312-748F42BBD514"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/BFA80301-4A01-426C-A84D-61C4C6F52C8E"
 } ]
 
-[4.946][INFO]: RESPONSE InitSession {
+[4.306][INFO]: RESPONSE InitSession {
    "acceptSslCerts": true,
    "applicationCacheEnabled": false,
    "browserConnectionEnabled": false,
    "browserName": "chrome",
    "chrome": {
-      "userDataDir": "C:\\Users\\Ricardo\\AppData\\Local\\Temp\\scoped_dir14816_4566"
+      "userDataDir": "C:\\Users\\Ricardo\\AppData\\Local\\Temp\\scoped_dir14288_17223"
    },
    "cssSelectorsEnabled": true,
    "databaseEnabled": false,
@@ -497,99 +504,99 @@
    "version": "46.0.2490.86",
    "webStorageEnabled": true
 }
-[4.951][INFO]: COMMAND SetWindowSize {
+[4.311][INFO]: COMMAND SetWindowSize {
    "height": 0,
-   "sessionId": "bff7d6e0f3b2aa95b6db58648a9c1287",
+   "sessionId": "30a95df6ef81427c042e6afac46b9c1f",
    "width": 0,
    "windowHandle": "current"
 }
-[4.951][DEBUG]: DevTools request: http://127.0.0.1:12847/json
-[4.955][DEBUG]: DevTools response: [ {
+[4.312][DEBUG]: DevTools request: http://127.0.0.1:12576/json
+[4.316][DEBUG]: DevTools response: [ {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/6F56A9AA-0318-4EB4-8106-8207936A9335",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/95B5DB21-40C7-43B3-A82F-081233665A66",
    "faviconUrl": "chrome://extension-icon/aapnijgdinlhnhlmodcfapnahmbfebeb/24/1",
-   "id": "6F56A9AA-0318-4EB4-8106-8207936A9335",
+   "id": "95B5DB21-40C7-43B3-A82F-081233665A66",
    "title": "Chrome Automation Extension",
    "type": "background_page",
    "url": "chrome-extension://aapnijgdinlhnhlmodcfapnahmbfebeb/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/6F56A9AA-0318-4EB4-8106-8207936A9335"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/95B5DB21-40C7-43B3-A82F-081233665A66"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/95FB395E-B5A3-4765-98B3-A28C5B4F5DBB",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/8D472B1F-7E6E-42AD-955B-CB5456B10CFF",
    "faviconUrl": "chrome://extension-icon/ldcecbkkoecffmfljeihcmifjjdoepkn/24/1",
-   "id": "95FB395E-B5A3-4765-98B3-A28C5B4F5DBB",
+   "id": "8D472B1F-7E6E-42AD-955B-CB5456B10CFF",
    "title": "Adblock Plus development build",
    "type": "background_page",
    "url": "chrome-extension://ldcecbkkoecffmfljeihcmifjjdoepkn/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/95FB395E-B5A3-4765-98B3-A28C5B4F5DBB"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/8D472B1F-7E6E-42AD-955B-CB5456B10CFF"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/40EEDBBD-AB9C-415F-89A6-FF67260AE4C6",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/AECF6836-2EBC-4E8C-B398-627957903C19",
    "faviconUrl": "chrome://extension-icon/kmendfapggjehodndflmmgagdbamhnfd/24/1",
-   "id": "40EEDBBD-AB9C-415F-89A6-FF67260AE4C6",
+   "id": "AECF6836-2EBC-4E8C-B398-627957903C19",
    "title": "CryptoTokenExtension",
    "type": "background_page",
    "url": "chrome-extension://kmendfapggjehodndflmmgagdbamhnfd/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/40EEDBBD-AB9C-415F-89A6-FF67260AE4C6"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/AECF6836-2EBC-4E8C-B398-627957903C19"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/FE74987A-C6EC-460B-9F46-27BD345669B1",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/375029EB-4DDE-4D3E-9130-E564951BD540",
    "faviconUrl": "chrome://extension-icon/neajdppkdcdipfabeoofebfddakdcjhd/24/1",
-   "id": "FE74987A-C6EC-460B-9F46-27BD345669B1",
+   "id": "375029EB-4DDE-4D3E-9130-E564951BD540",
    "title": "Google Network Speech",
    "type": "background_page",
    "url": "chrome-extension://neajdppkdcdipfabeoofebfddakdcjhd/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/FE74987A-C6EC-460B-9F46-27BD345669B1"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/375029EB-4DDE-4D3E-9130-E564951BD540"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/BF05CC02-B45B-4444-9AA7-F0F4212C9C84",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/068F5BD0-9CB3-4012-9229-7A6E694C5C5F",
    "faviconUrl": "chrome://extension-icon/ennkphjdgehloodpbhlhldgbnhmacadg/24/1",
-   "id": "BF05CC02-B45B-4444-9AA7-F0F4212C9C84",
+   "id": "068F5BD0-9CB3-4012-9229-7A6E694C5C5F",
    "title": "Settings",
    "type": "background_page",
    "url": "chrome-extension://ennkphjdgehloodpbhlhldgbnhmacadg/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/BF05CC02-B45B-4444-9AA7-F0F4212C9C84"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/068F5BD0-9CB3-4012-9229-7A6E694C5C5F"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/EBCD1539-A16C-4F04-BD0C-91E12372F46B",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/E2B917A9-24FF-4E1E-AB59-2DA0C7C05EE5",
    "faviconUrl": "chrome://extension-icon/gfdkimpbcpahaombhbimeihdjnejgicl/24/1",
-   "id": "EBCD1539-A16C-4F04-BD0C-91E12372F46B",
+   "id": "E2B917A9-24FF-4E1E-AB59-2DA0C7C05EE5",
    "title": "Feedback",
    "type": "background_page",
    "url": "chrome-extension://gfdkimpbcpahaombhbimeihdjnejgicl/_generated_background_page.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/EBCD1539-A16C-4F04-BD0C-91E12372F46B"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/E2B917A9-24FF-4E1E-AB59-2DA0C7C05EE5"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/6E376A8E-3B16-4F69-85EB-9263484D8F9C",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/1FAA23EB-0DA0-491D-8C38-CBBDE8F4B100",
    "faviconUrl": "chrome://extension-icon/nkeimhogjdpnpccoofpliimaahmaaome/24/1",
-   "id": "6E376A8E-3B16-4F69-85EB-9263484D8F9C",
+   "id": "1FAA23EB-0DA0-491D-8C38-CBBDE8F4B100",
    "title": "Google+ Hangouts",
    "type": "background_page",
    "url": "chrome-extension://nkeimhogjdpnpccoofpliimaahmaaome/background.html",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/6E376A8E-3B16-4F69-85EB-9263484D8F9C"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/1FAA23EB-0DA0-491D-8C38-CBBDE8F4B100"
 }, {
    "description": "",
-   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12847/devtools/page/3F5C04B4-CA0F-4DC5-B312-748F42BBD514",
-   "id": "3F5C04B4-CA0F-4DC5-B312-748F42BBD514",
+   "devtoolsFrontendUrl": "/devtools/inspector.html?ws=127.0.0.1:12576/devtools/page/BFA80301-4A01-426C-A84D-61C4C6F52C8E",
+   "id": "BFA80301-4A01-426C-A84D-61C4C6F52C8E",
    "title": "data:,",
    "type": "page",
    "url": "data:,",
-   "webSocketDebuggerUrl": "ws://127.0.0.1:12847/devtools/page/3F5C04B4-CA0F-4DC5-B312-748F42BBD514"
+   "webSocketDebuggerUrl": "ws://127.0.0.1:12576/devtools/page/BFA80301-4A01-426C-A84D-61C4C6F52C8E"
 } ]
 
-[4.959][DEBUG]: DEVTOOLS COMMAND DOM.getDocument (id=1) {
+[4.319][DEBUG]: DEVTOOLS COMMAND DOM.getDocument (id=1) {
 
 }
-[4.959][DEBUG]: DEVTOOLS COMMAND Runtime.enable (id=2) {
+[4.319][DEBUG]: DEVTOOLS COMMAND Runtime.enable (id=2) {
 
 }
-[4.959][DEBUG]: DEVTOOLS COMMAND Page.enable (id=3) {
+[4.319][DEBUG]: DEVTOOLS COMMAND Page.enable (id=3) {
 
 }
-[4.959][DEBUG]: DEVTOOLS COMMAND Page.enable (id=4) {
+[4.319][DEBUG]: DEVTOOLS COMMAND Page.enable (id=4) {
 
 }
-[4.961][DEBUG]: DEVTOOLS RESPONSE DOM.getDocument (id=1) {
+[4.320][DEBUG]: DEVTOOLS RESPONSE DOM.getDocument (id=1) {
    "root": {
       "baseURL": "chrome-extension://aapnijgdinlhnhlmodcfapnahmbfebeb/_generated_background_page.html",
       "childNodeCount": 2,
@@ -636,67 +643,67 @@
       "xmlVersion": ""
    }
 }
-[4.961][DEBUG]: DEVTOOLS EVENT Runtime.executionContextCreated {
+[4.320][DEBUG]: DEVTOOLS EVENT Runtime.executionContextCreated {
    "context": {
-      "frameId": "10488.1",
+      "frameId": "11464.1",
       "id": 1,
       "name": "",
       "origin": ""
    }
 }
-[4.961][DEBUG]: DEVTOOLS RESPONSE Runtime.enable (id=2) {
+[4.320][DEBUG]: DEVTOOLS RESPONSE Runtime.enable (id=2) {
 
 }
-[4.961][DEBUG]: DEVTOOLS RESPONSE Page.enable (id=3) {
+[4.320][DEBUG]: DEVTOOLS RESPONSE Page.enable (id=3) {
 
 }
-[4.961][DEBUG]: DEVTOOLS RESPONSE Page.enable (id=4) {
+[4.320][DEBUG]: DEVTOOLS RESPONSE Page.enable (id=4) {
 
 }
-[4.961][DEBUG]: DEVTOOLS COMMAND Page.enable (id=5) {
+[4.320][DEBUG]: DEVTOOLS COMMAND Page.enable (id=5) {
 
 }
-[4.961][DEBUG]: DEVTOOLS RESPONSE Page.enable (id=5) {
+[4.321][DEBUG]: DEVTOOLS RESPONSE Page.enable (id=5) {
 
 }
-[4.962][INFO]: Waiting for pending navigations...
-[4.962][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=6) {
+[4.321][INFO]: Waiting for pending navigations...
+[4.321][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=6) {
    "expression": "var isLoaded = document.readyState == 'complete' ||    document.readyState == 'interactive';if (isLoaded) {  var frame = document.createElement('iframe');  frame.src = 'about:blank';  document.body..."
 }
-[4.979][DEBUG]: DEVTOOLS EVENT DOM.childNodeCountUpdated {
+[4.341][DEBUG]: DEVTOOLS EVENT DOM.childNodeCountUpdated {
    "childNodeCount": 2,
    "nodeId": 5
 }
-[4.979][DEBUG]: DEVTOOLS EVENT Page.frameAttached {
-   "frameId": "10488.3",
-   "parentFrameId": "10488.1"
+[4.341][DEBUG]: DEVTOOLS EVENT Page.frameAttached {
+   "frameId": "11464.3",
+   "parentFrameId": "11464.1"
 }
-[4.979][DEBUG]: DEVTOOLS EVENT Page.frameStartedLoading {
-   "frameId": "10488.3"
+[4.341][DEBUG]: DEVTOOLS EVENT Page.frameStartedLoading {
+   "frameId": "11464.3"
 }
-[4.979][DEBUG]: DEVTOOLS EVENT Page.frameNavigated {
+[4.341][DEBUG]: DEVTOOLS EVENT Page.frameNavigated {
    "frame": {
-      "id": "10488.3",
-      "loaderId": "10488.4",
+      "id": "11464.3",
+      "loaderId": "11464.4",
       "mimeType": "text/html",
       "name": "",
-      "parentId": "10488.1",
+      "parentId": "11464.1",
       "securityOrigin": "chrome-extension://aapnijgdinlhnhlmodcfapnahmbfebeb",
       "url": "about:blank"
    }
 }
-[4.979][DEBUG]: DEVTOOLS EVENT Runtime.executionContextCreated {
+[4.341][DEBUG]: DEVTOOLS EVENT Runtime.executionContextCreated {
    "context": {
-      "frameId": "10488.3",
+      "frameId": "11464.3",
       "id": 2,
       "name": "",
       "origin": "chrome-extension://aapnijgdinlhnhlmodcfapnahmbfebeb"
    }
 }
-[4.979][DEBUG]: DEVTOOLS EVENT Page.frameStoppedLoading {
-   "frameId": "10488.3"
+[4.341][DEBUG]: DEVTOOLS EVENT Page.frameStoppedLoading {
+   "frameId": "11464.3"
 }
-[4.979][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=6) {
+[4.341][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=6) {
    "result": {
       "description": "1",
       "type": "number",
@@ -704,22 +711,22 @@
    },
    "wasThrown": false
 }
-[4.979][INFO]: Done waiting for pending navigations
-[4.980][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=7) {
+[4.341][INFO]: Done waiting for pending navigations
+[4.342][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=7) {
    "expression": "(function() { // Copyright (c) 2012 The Chromium Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style license that can be\n// found in the LICENSE file.\n\n/**\n * Enum f...",
    "returnByValue": true
 }
-[4.980][DEBUG]: DEVTOOLS EVENT DOM.childNodeCountUpdated {
+[4.342][DEBUG]: DEVTOOLS EVENT DOM.childNodeCountUpdated {
    "childNodeCount": 1,
    "nodeId": 5
 }
-[4.980][DEBUG]: DEVTOOLS EVENT Runtime.executionContextDestroyed {
+[4.342][DEBUG]: DEVTOOLS EVENT Runtime.executionContextDestroyed {
    "executionContextId": 2
 }
-[4.980][DEBUG]: DEVTOOLS EVENT Page.frameDetached {
-   "frameId": "10488.3"
+[4.342][DEBUG]: DEVTOOLS EVENT Page.frameDetached {
+   "frameId": "11464.3"
 }
-[5.040][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=7) {
+[4.424][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=7) {
    "result": {
       "type": "object",
       "value": {
@@ -729,27 +736,11 @@
    },
    "wasThrown": false
 }
-[5.041][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=8) {
+[4.424][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=8) {
    "expression": "(function() { // Copyright (c) 2012 The Chromium Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style license that can be\n// found in the LICENSE file.\n\n/**\n * Enum f...",
    "returnByValue": true
 }
-[5.107][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=8) {
-   "result": {
-      "type": "object",
-      "value": {
-         "status": 0,
-         "value": {
-            "status": 0
-         }
-      }
-   },
-   "wasThrown": false
-}
-[5.208][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=9) {
-   "expression": "(function() { // Copyright (c) 2012 The Chromium Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style license that can be\n// found in the LICENSE file.\n\n/**\n * Enum f...",
-   "returnByValue": true
-}
-[5.211][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=9) {
+[4.469][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=8) {
    "result": {
       "type": "object",
       "value": {
@@ -762,30 +753,30 @@
    },
    "wasThrown": false
 }
-[5.211][INFO]: RESPONSE SetWindowSize
-[5.215][INFO]: COMMAND Navigate {
-   "sessionId": "bff7d6e0f3b2aa95b6db58648a9c1287",
-   "url": "https://openload.co/embed/vCP4yOlsouQ/tamzaranha12.mp4"
+[4.469][INFO]: RESPONSE SetWindowSize
+[4.475][INFO]: COMMAND Navigate {
+   "sessionId": "30a95df6ef81427c042e6afac46b9c1f",
+   "url": "https://openload.co/embed/qH3KkIHCd8g/otrintatres15.avi.mp4"
 }
-[5.216][DEBUG]: DEVTOOLS COMMAND Console.enable (id=1) {
+[4.480][DEBUG]: DEVTOOLS COMMAND Console.enable (id=1) {
 
 }
-[5.217][DEBUG]: DEVTOOLS COMMAND DOM.getDocument (id=2) {
+[4.481][DEBUG]: DEVTOOLS COMMAND DOM.getDocument (id=2) {
 
 }
-[5.217][DEBUG]: DEVTOOLS COMMAND Runtime.enable (id=3) {
+[4.481][DEBUG]: DEVTOOLS COMMAND Runtime.enable (id=3) {
 
 }
-[5.218][DEBUG]: DEVTOOLS COMMAND Page.enable (id=4) {
+[4.481][DEBUG]: DEVTOOLS COMMAND Page.enable (id=4) {
 
 }
-[5.218][DEBUG]: DEVTOOLS COMMAND Page.enable (id=5) {
+[4.481][DEBUG]: DEVTOOLS COMMAND Page.enable (id=5) {
 
 }
-[5.218][DEBUG]: DEVTOOLS RESPONSE Console.enable (id=1) {
+[4.482][DEBUG]: DEVTOOLS RESPONSE Console.enable (id=1) {
 
 }
-[5.219][DEBUG]: DEVTOOLS RESPONSE DOM.getDocument (id=2) {
+[4.483][DEBUG]: DEVTOOLS RESPONSE DOM.getDocument (id=2) {
    "root": {
       "baseURL": "data:,",
       "childNodeCount": 1,
@@ -824,67 +815,67 @@
       "xmlVersion": ""
    }
 }
-[5.231][DEBUG]: DEVTOOLS EVENT Runtime.executionContextCreated {
+[4.495][DEBUG]: DEVTOOLS EVENT Runtime.executionContextCreated {
    "context": {
-      "frameId": "14700.3",
+      "frameId": "11828.3",
       "id": 1,
       "name": "",
       "origin": "://"
    }
 }
-[5.231][DEBUG]: DEVTOOLS RESPONSE Runtime.enable (id=3) {
+[4.495][DEBUG]: DEVTOOLS RESPONSE Runtime.enable (id=3) {
 
 }
-[5.231][DEBUG]: DEVTOOLS RESPONSE Page.enable (id=4) {
+[4.495][DEBUG]: DEVTOOLS RESPONSE Page.enable (id=4) {
 
 }
-[5.231][DEBUG]: DEVTOOLS RESPONSE Page.enable (id=5) {
+[4.495][DEBUG]: DEVTOOLS RESPONSE Page.enable (id=5) {
 
 }
-[5.231][DEBUG]: DEVTOOLS COMMAND Page.enable (id=6) {
+[4.495][DEBUG]: DEVTOOLS COMMAND Page.enable (id=6) {
 
 }
-[5.232][DEBUG]: DEVTOOLS RESPONSE Page.enable (id=6) {
+[4.496][DEBUG]: DEVTOOLS RESPONSE Page.enable (id=6) {
 
 }
-[5.232][INFO]: Waiting for pending navigations...
-[5.232][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=7) {
+[4.496][INFO]: Waiting for pending navigations...
+[4.496][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=7) {
    "expression": "var isLoaded = document.readyState == 'complete' ||    document.readyState == 'interactive';if (isLoaded) {  var frame = document.createElement('iframe');  frame.src = 'about:blank';  document.body..."
 }
-[5.254][DEBUG]: DEVTOOLS EVENT DOM.childNodeCountUpdated {
+[4.517][DEBUG]: DEVTOOLS EVENT DOM.childNodeCountUpdated {
    "childNodeCount": 2,
    "nodeId": 4
 }
-[5.254][DEBUG]: DEVTOOLS EVENT Page.frameAttached {
-   "frameId": "14700.4",
-   "parentFrameId": "14700.3"
+[4.517][DEBUG]: DEVTOOLS EVENT Page.frameAttached {
+   "frameId": "11828.4",
+   "parentFrameId": "11828.3"
 }
-[5.254][DEBUG]: DEVTOOLS EVENT Page.frameStartedLoading {
-   "frameId": "14700.4"
+[4.518][DEBUG]: DEVTOOLS EVENT Page.frameStartedLoading {
+   "frameId": "11828.4"
 }
-[5.254][DEBUG]: DEVTOOLS EVENT Page.frameNavigated {
+[4.518][DEBUG]: DEVTOOLS EVENT Page.frameNavigated {
    "frame": {
-      "id": "14700.4",
-      "loaderId": "14700.5",
+      "id": "11828.4",
+      "loaderId": "11828.5",
       "mimeType": "text/html",
       "name": "",
-      "parentId": "14700.3",
+      "parentId": "11828.3",
       "securityOrigin": "://",
       "url": "about:blank"
    }
 }
-[5.254][DEBUG]: DEVTOOLS EVENT Runtime.executionContextCreated {
+[4.518][DEBUG]: DEVTOOLS EVENT Runtime.executionContextCreated {
    "context": {
-      "frameId": "14700.4",
+      "frameId": "11828.4",
       "id": 2,
       "name": "",
       "origin": "://"
    }
 }
-[5.254][DEBUG]: DEVTOOLS EVENT Page.frameStoppedLoading {
-   "frameId": "14700.4"
+[4.518][DEBUG]: DEVTOOLS EVENT Page.frameStoppedLoading {
+   "frameId": "11828.4"
 }
-[5.254][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=7) {
+[4.518][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=7) {
    "result": {
       "description": "1",
       "type": "number",
@@ -892,74 +883,280 @@
    },
    "wasThrown": false
 }
-[5.255][INFO]: Done waiting for pending navigations
-[5.255][DEBUG]: DEVTOOLS COMMAND Page.navigate (id=8) {
-   "url": "https://openload.co/embed/vCP4yOlsouQ/tamzaranha12.mp4"
+[4.518][INFO]: Done waiting for pending navigations
+[4.518][DEBUG]: DEVTOOLS COMMAND Page.navigate (id=8) {
+   "url": "https://openload.co/embed/qH3KkIHCd8g/otrintatres15.avi.mp4"
 }
-[6.549][DEBUG]: DEVTOOLS EVENT Runtime.executionContextsCleared {
+[5.894][DEBUG]: DEVTOOLS EVENT Runtime.executionContextsCleared {
 
 }
-[6.549][DEBUG]: DEVTOOLS EVENT Console.messagesCleared {
+[5.894][DEBUG]: DEVTOOLS EVENT Console.messagesCleared {
 
 }
-[6.549][DEBUG]: DEVTOOLS RESPONSE Page.navigate (id=8) {
-   "frameId": "9792.2"
+[5.894][DEBUG]: DEVTOOLS RESPONSE Page.navigate (id=8) {
+   "frameId": "8132.2"
 }
-[6.549][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=9) {
+[5.894][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=9) {
    "expression": "document.URL"
 }
-[6.549][DEBUG]: DEVTOOLS EVENT Page.frameStartedLoading {
-   "frameId": "9792.2"
+[5.895][DEBUG]: DEVTOOLS EVENT Page.frameStartedLoading {
+   "frameId": "8132.2"
 }
-[6.571][DEBUG]: DEVTOOLS EVENT Page.frameNavigated {
+[5.912][DEBUG]: DEVTOOLS EVENT Page.frameNavigated {
    "frame": {
-      "id": "9792.2",
-      "loaderId": "9792.3",
+      "id": "8132.2",
+      "loaderId": "8132.3",
       "mimeType": "text/html",
       "securityOrigin": "https://openload.co",
-      "url": "https://openload.co/embed/vCP4yOlsouQ/tamzaranha12.mp4"
+      "url": "https://openload.co/embed/qH3KkIHCd8g/otrintatres15.avi.mp4"
    }
 }
-[6.571][DEBUG]: DEVTOOLS EVENT Console.messagesCleared {
+[5.912][DEBUG]: DEVTOOLS EVENT Console.messagesCleared {
 
 }
-[6.571][DEBUG]: DEVTOOLS EVENT Runtime.executionContextCreated {
+[5.913][DEBUG]: DEVTOOLS EVENT Runtime.executionContextCreated {
    "context": {
-      "frameId": "9792.2",
+      "frameId": "8132.2",
       "id": 1,
       "name": "",
       "origin": "https://openload.co"
    }
 }
-[6.581][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=9) {
+[5.924][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=9) {
    "result": {
       "type": "string",
-      "value": "https://openload.co/embed/vCP4yOlsouQ/tamzaranha12.mp4"
+      "value": "https://openload.co/embed/qH3KkIHCd8g/otrintatres15.avi.mp4"
    },
    "wasThrown": false
 }
-[6.581][INFO]: Waiting for pending navigations...
-[6.672][DEBUG]: DEVTOOLS EVENT Runtime.executionContextCreated {
+[5.924][INFO]: Waiting for pending navigations...
+[6.025][DEBUG]: DEVTOOLS EVENT Runtime.executionContextCreated {
    "context": {
-      "frameId": "9792.2",
+      "frameId": "8132.2",
       "id": 2,
       "name": "Adblock Plus development build",
       "origin": "chrome-extension://ldcecbkkoecffmfljeihcmifjjdoepkn",
       "type": "Extension"
    }
 }
-[7.698][DEBUG]: DEVTOOLS EVENT DOM.documentUpdated {
+[6.439][DEBUG]: DEVTOOLS EVENT Console.messageAdded {
+   "message": {
+      "column": 3202,
+      "level": "warning",
+      "line": 1,
+      "source": "deprecation",
+      "stackTrace": [ {
+         "columnNumber": 3202,
+         "functionName": "t.Pb",
+         "lineNumber": 1,
+         "scriptId": "82",
+         "url": "https://openload.co/assets/js/video-js/video.js"
+      }, {
+         "columnNumber": 2281,
+         "functionName": "e.ca.e.ca",
+         "lineNumber": 1,
+         "scriptId": "82",
+         "url": "https://openload.co/assets/js/video-js/video.js"
+      }, {
+         "columnNumber": 7940,
+         "functionName": "m.event.trigger",
+         "lineNumber": 3,
+         "scriptId": "78",
+         "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
+      }, {
+         "columnNumber": 15517,
+         "functionName": "",
+         "lineNumber": 3,
+         "scriptId": "78",
+         "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
+      }, {
+         "columnNumber": 2975,
+         "functionName": "m.extend.each",
+         "lineNumber": 2,
+         "scriptId": "78",
+         "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
+      }, {
+         "columnNumber": 835,
+         "functionName": "m.fn.m.each",
+         "lineNumber": 2,
+         "scriptId": "78",
+         "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
+      }, {
+         "columnNumber": 15493,
+         "functionName": "m.fn.extend.trigger",
+         "lineNumber": 3,
+         "scriptId": "78",
+         "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
+      }, {
+         "columnNumber": 1188,
+         "functionName": "",
+         "lineNumber": 18,
+         "scriptId": "87",
+         "url": "https://openload.co/assets/js/video-js/video.js.openload.js"
+      }, {
+         "columnNumber": 6564,
+         "functionName": "s.I",
+         "lineNumber": 2,
+         "scriptId": "82",
+         "url": "https://openload.co/assets/js/video-js/video.js"
+      }, {
+         "columnNumber": 3967,
+         "functionName": "t.a.t.Ea.extend.l",
+         "lineNumber": 2,
+         "scriptId": "82",
+         "url": "https://openload.co/assets/js/video-js/video.js"
+      }, {
+         "columnNumber": 1793,
+         "functionName": "d",
+         "lineNumber": 1,
+         "scriptId": "82",
+         "url": "https://openload.co/assets/js/video-js/video.js"
+      }, {
+         "columnNumber": 320,
+         "functionName": "t.Player.t.a.extend.l",
+         "lineNumber": 7,
+         "scriptId": "82",
+         "url": "https://openload.co/assets/js/video-js/video.js"
+      }, {
+         "columnNumber": 1793,
+         "functionName": "d",
+         "lineNumber": 1,
+         "scriptId": "82",
+         "url": "https://openload.co/assets/js/video-js/video.js"
+      }, {
+         "columnNumber": 591,
+         "functionName": "t",
+         "lineNumber": 1,
+         "scriptId": "82",
+         "url": "https://openload.co/assets/js/video-js/video.js"
+      }, {
+         "columnNumber": 25,
+         "functionName": "",
+         "lineNumber": 16,
+         "scriptId": "87",
+         "url": "https://openload.co/assets/js/video-js/video.js.openload.js"
+      } ],
+      "text": "'webkitMovementX' is deprecated. Please use 'movementX' instead.",
+      "timestamp": 1448388353.64694,
+      "type": "log",
+      "url": "https://openload.co/assets/js/video-js/video.js"
+   }
+}
+[6.441][DEBUG]: DEVTOOLS EVENT Console.messageAdded {
+   "message": {
+      "column": 3202,
+      "level": "warning",
+      "line": 1,
+      "source": "deprecation",
+      "stackTrace": [ {
+         "columnNumber": 3202,
+         "functionName": "t.Pb",
+         "lineNumber": 1,
+         "scriptId": "82",
+         "url": "https://openload.co/assets/js/video-js/video.js"
+      }, {
+         "columnNumber": 2281,
+         "functionName": "e.ca.e.ca",
+         "lineNumber": 1,
+         "scriptId": "82",
+         "url": "https://openload.co/assets/js/video-js/video.js"
+      }, {
+         "columnNumber": 7940,
+         "functionName": "m.event.trigger",
+         "lineNumber": 3,
+         "scriptId": "78",
+         "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
+      }, {
+         "columnNumber": 15517,
+         "functionName": "",
+         "lineNumber": 3,
+         "scriptId": "78",
+         "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
+      }, {
+         "columnNumber": 2975,
+         "functionName": "m.extend.each",
+         "lineNumber": 2,
+         "scriptId": "78",
+         "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
+      }, {
+         "columnNumber": 835,
+         "functionName": "m.fn.m.each",
+         "lineNumber": 2,
+         "scriptId": "78",
+         "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
+      }, {
+         "columnNumber": 15493,
+         "functionName": "m.fn.extend.trigger",
+         "lineNumber": 3,
+         "scriptId": "78",
+         "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"
+      }, {
+         "columnNumber": 1188,
+         "functionName": "",
+         "lineNumber": 18,
+         "scriptId": "87",
+         "url": "https://openload.co/assets/js/video-js/video.js.openload.js"
+      }, {
+         "columnNumber": 6564,
+         "functionName": "s.I",
+         "lineNumber": 2,
+         "scriptId": "82",
+         "url": "https://openload.co/assets/js/video-js/video.js"
+      }, {
+         "columnNumber": 3967,
+         "functionName": "t.a.t.Ea.extend.l",
+         "lineNumber": 2,
+         "scriptId": "82",
+         "url": "https://openload.co/assets/js/video-js/video.js"
+      }, {
+         "columnNumber": 1793,
+         "functionName": "d",
+         "lineNumber": 1,
+         "scriptId": "82",
+         "url": "https://openload.co/assets/js/video-js/video.js"
+      }, {
+         "columnNumber": 320,
+         "functionName": "t.Player.t.a.extend.l",
+         "lineNumber": 7,
+         "scriptId": "82",
+         "url": "https://openload.co/assets/js/video-js/video.js"
+      }, {
+         "columnNumber": 1793,
+         "functionName": "d",
+         "lineNumber": 1,
+         "scriptId": "82",
+         "url": "https://openload.co/assets/js/video-js/video.js"
+      }, {
+         "columnNumber": 591,
+         "functionName": "t",
+         "lineNumber": 1,
+         "scriptId": "82",
+         "url": "https://openload.co/assets/js/video-js/video.js"
+      }, {
+         "columnNumber": 25,
+         "functionName": "",
+         "lineNumber": 16,
+         "scriptId": "87",
+         "url": "https://openload.co/assets/js/video-js/video.js.openload.js"
+      } ],
+      "text": "'webkitMovementY' is deprecated. Please use 'movementY' instead.",
+      "timestamp": 1448388353.64728,
+      "type": "log",
+      "url": "https://openload.co/assets/js/video-js/video.js"
+   }
+}
+[6.806][DEBUG]: DEVTOOLS EVENT DOM.documentUpdated {
 
 }
-[7.698][DEBUG]: DEVTOOLS COMMAND DOM.getDocument (id=10) {
+[6.806][DEBUG]: DEVTOOLS COMMAND DOM.getDocument (id=10) {
 
 }
-[7.698][DEBUG]: DEVTOOLS EVENT Page.domContentEventFired {
-   "timestamp": 496144.698252
+[6.807][DEBUG]: DEVTOOLS EVENT Page.domContentEventFired {
+   "timestamp": 602259.086781
 }
-[7.711][DEBUG]: DEVTOOLS RESPONSE DOM.getDocument (id=10) {
+[7.419][DEBUG]: DEVTOOLS RESPONSE DOM.getDocument (id=10) {
    "root": {
-      "baseURL": "https://openload.co/embed/vCP4yOlsouQ/tamzaranha12.mp4",
+      "baseURL": "https://openload.co/embed/qH3KkIHCd8g/otrintatres15.avi.mp4",
       "childNodeCount": 2,
       "children": [ {
          "localName": "",
@@ -1004,7 +1201,7 @@
             "shadowRootType": "author"
          } ]
       } ],
-      "documentURL": "https://openload.co/embed/vCP4yOlsouQ/tamzaranha12.mp4",
+      "documentURL": "https://openload.co/embed/qH3KkIHCd8g/otrintatres15.avi.mp4",
       "localName": "",
       "nodeId": 1,
       "nodeName": "#document",
@@ -1013,42 +1210,42 @@
       "xmlVersion": ""
    }
 }
-[7.755][DEBUG]: DEVTOOLS EVENT DOM.childNodeCountUpdated {
+[7.508][DEBUG]: DEVTOOLS EVENT DOM.childNodeCountUpdated {
    "childNodeCount": 23,
    "nodeId": 5
 }
-[8.929][DEBUG]: DEVTOOLS EVENT Console.messageAdded {
+[9.137][DEBUG]: DEVTOOLS EVENT Console.messageAdded {
    "message": {
       "column": 0,
       "level": "error",
       "line": 0,
-      "networkRequestId": "9792.20",
+      "networkRequestId": "8132.21",
       "source": "network",
       "text": "Failed to load resource: the server responded with a status of 400 (Bad Request)",
-      "timestamp": 1448282240.87366,
+      "timestamp": 1448388356.34556,
       "type": "log",
-      "url": "https://analytics.openload.co/piwik.php?action_name=&idsite=1&rec=1&r=193964&h=12&m=37&s=20&url=https%3A%2F%2Fopenload.co%2Fembed%2FvCP4yOlsouQ%2Ftamzaranha12.mp4&_id=6d43b457dda1482e&_idts=1448282..."
+      "url": "https://analytics.openload.co/piwik.php?action_name=&idsite=1&rec=1&r=261803&h=18&m=5&s=54&url=https%3A%2F%2Fopenload.co%2Fembed%2FqH3KkIHCd8g%2Fotrintatres15.avi.mp4&_id=6d25e12aba66d38a&_idts=144..."
    }
 }
-[9.025][DEBUG]: DEVTOOLS EVENT Page.loadEventFired {
-   "timestamp": 496146.024261
+[9.150][DEBUG]: DEVTOOLS EVENT Page.loadEventFired {
+   "timestamp": 602261.423972
 }
-[9.025][DEBUG]: DEVTOOLS EVENT Page.frameStoppedLoading {
-   "frameId": "9792.2"
+[9.151][DEBUG]: DEVTOOLS EVENT Page.frameStoppedLoading {
+   "frameId": "8132.2"
 }
-[9.025][INFO]: Done waiting for pending navigations
-[9.025][INFO]: RESPONSE Navigate
-[9.030][INFO]: COMMAND SetWindowSize {
+[9.151][INFO]: Done waiting for pending navigations
+[9.151][INFO]: RESPONSE Navigate
+[9.156][INFO]: COMMAND SetWindowSize {
    "height": 0,
-   "sessionId": "bff7d6e0f3b2aa95b6db58648a9c1287",
+   "sessionId": "30a95df6ef81427c042e6afac46b9c1f",
    "width": 0,
    "windowHandle": "current"
 }
-[9.031][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=10) {
+[9.157][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=9) {
    "expression": "(function() { // Copyright (c) 2012 The Chromium Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style license that can be\n// found in the LICENSE file.\n\n/**\n * Enum f...",
    "returnByValue": true
 }
-[9.036][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=10) {
+[9.163][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=9) {
    "result": {
       "type": "object",
       "value": {
@@ -1058,11 +1255,11 @@
    },
    "wasThrown": false
 }
-[9.037][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=11) {
+[9.163][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=10) {
    "expression": "(function() { // Copyright (c) 2012 The Chromium Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style license that can be\n// found in the LICENSE file.\n\n/**\n * Enum f...",
    "returnByValue": true
 }
-[9.039][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=11) {
+[9.167][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=10) {
    "result": {
       "type": "object",
       "value": {
@@ -1075,46 +1272,46 @@
    },
    "wasThrown": false
 }
-[9.040][INFO]: RESPONSE SetWindowSize
-[9.044][INFO]: COMMAND FindElement {
-   "sessionId": "bff7d6e0f3b2aa95b6db58648a9c1287",
+[9.167][INFO]: RESPONSE SetWindowSize
+[9.172][INFO]: COMMAND FindElement {
+   "sessionId": "30a95df6ef81427c042e6afac46b9c1f",
    "using": "id",
    "value": "mediaspace_wrapper"
 }
-[9.044][INFO]: Waiting for pending navigations...
-[9.044][INFO]: Done waiting for pending navigations
-[9.048][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=11) {
+[9.172][INFO]: Waiting for pending navigations...
+[9.172][INFO]: Done waiting for pending navigations
+[9.177][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=11) {
    "expression": "(function() { // Copyright (c) 2012 The Chromium Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style license that can be\n// found in the LICENSE file.\n\n/**\n * Enum f...",
    "returnByValue": true
 }
-[9.065][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=11) {
+[9.204][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=11) {
    "result": {
       "type": "object",
       "value": {
          "status": 0,
          "value": {
-            "ELEMENT": "0.20570911094546318-1"
+            "ELEMENT": "0.3851483759935945-1"
          }
       }
    },
    "wasThrown": false
 }
-[9.065][INFO]: Waiting for pending navigations...
-[9.065][INFO]: Done waiting for pending navigations
-[9.065][INFO]: RESPONSE FindElement {
-   "ELEMENT": "0.20570911094546318-1"
+[9.204][INFO]: Waiting for pending navigations...
+[9.204][INFO]: Done waiting for pending navigations
+[9.204][INFO]: RESPONSE FindElement {
+   "ELEMENT": "0.3851483759935945-1"
 }
-[9.070][INFO]: COMMAND ClickElement {
-   "id": "0.20570911094546318-1",
-   "sessionId": "bff7d6e0f3b2aa95b6db58648a9c1287"
+[9.209][INFO]: COMMAND ClickElement {
+   "id": "0.3851483759935945-1",
+   "sessionId": "30a95df6ef81427c042e6afac46b9c1f"
 }
-[9.070][INFO]: Waiting for pending navigations...
-[9.070][INFO]: Done waiting for pending navigations
-[9.070][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=12) {
+[9.209][INFO]: Waiting for pending navigations...
+[9.209][INFO]: Done waiting for pending navigations
+[9.209][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=12) {
    "expression": "(function() { // Copyright (c) 2012 The Chromium Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style license that can be\n// found in the LICENSE file.\n\n/**\n * Enum f...",
    "returnByValue": true
 }
-[9.073][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=12) {
+[9.212][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=12) {
    "result": {
       "type": "object",
       "value": {
@@ -1124,11 +1321,11 @@
    },
    "wasThrown": false
 }
-[9.074][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=13) {
+[9.212][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=13) {
    "expression": "(function() { // Copyright (c) 2012 The Chromium Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style license that can be\n// found in the LICENSE file.\n\n/**\n * Enum f...",
    "returnByValue": true
 }
-[9.076][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=13) {
+[9.214][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=13) {
    "result": {
       "type": "object",
       "value": {
@@ -1138,11 +1335,11 @@
    },
    "wasThrown": false
 }
-[9.079][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=14) {
+[9.217][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=14) {
    "expression": "(function() { // Copyright (c) 2012 The Chromium Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style license that can be\n// found in the LICENSE file.\n\n/**\n * Enum f...",
    "returnByValue": true
 }
-[9.101][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=14) {
+[9.234][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=14) {
    "result": {
       "type": "object",
       "value": {
@@ -1152,11 +1349,11 @@
    },
    "wasThrown": false
 }
-[9.102][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=15) {
+[9.235][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=15) {
    "expression": "(function() { // Copyright (c) 2012 The Chromium Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style license that can be\n// found in the LICENSE file.\n\n/**\n * Enum f...",
    "returnByValue": true
 }
-[9.193][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=15) {
+[9.238][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=15) {
    "result": {
       "type": "object",
       "value": {
@@ -1171,11 +1368,11 @@
    },
    "wasThrown": false
 }
-[9.195][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=16) {
+[9.239][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=16) {
    "expression": "(function() { // Copyright (c) 2012 The Chromium Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style license that can be\n// found in the LICENSE file.\n\n/**\n * Enum f...",
    "returnByValue": true
 }
-[9.208][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=16) {
+[9.244][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=16) {
    "result": {
       "type": "object",
       "value": {
@@ -1191,11 +1388,11 @@
    },
    "wasThrown": false
 }
-[9.209][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=17) {
+[9.245][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=17) {
    "expression": "(function() { // Copyright (c) 2012 The Chromium Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style license that can be\n// found in the LICENSE file.\n\n/**\n * Enum f...",
    "returnByValue": true
 }
-[9.212][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=17) {
+[9.248][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=17) {
    "result": {
       "type": "object",
       "value": {
@@ -1208,7 +1405,7 @@
    },
    "wasThrown": false
 }
-[9.212][DEBUG]: DEVTOOLS COMMAND Input.dispatchMouseEvent (id=18) {
+[9.248][DEBUG]: DEVTOOLS COMMAND Input.dispatchMouseEvent (id=18) {
    "button": "none",
    "clickCount": 0,
    "modifiers": 0,
@@ -1216,10 +1413,10 @@
    "x": 304,
    "y": 148
 }
-[9.213][DEBUG]: DEVTOOLS RESPONSE Input.dispatchMouseEvent (id=18) {
+[9.249][DEBUG]: DEVTOOLS RESPONSE Input.dispatchMouseEvent (id=18) {
 
 }
-[9.213][DEBUG]: DEVTOOLS COMMAND Input.dispatchMouseEvent (id=19) {
+[9.249][DEBUG]: DEVTOOLS COMMAND Input.dispatchMouseEvent (id=19) {
    "button": "left",
    "clickCount": 1,
    "modifiers": 0,
@@ -1227,10 +1424,10 @@
    "x": 304,
    "y": 148
 }
-[9.213][DEBUG]: DEVTOOLS RESPONSE Input.dispatchMouseEvent (id=19) {
+[9.249][DEBUG]: DEVTOOLS RESPONSE Input.dispatchMouseEvent (id=19) {
 
 }
-[9.213][DEBUG]: DEVTOOLS COMMAND Input.dispatchMouseEvent (id=20) {
+[9.249][DEBUG]: DEVTOOLS COMMAND Input.dispatchMouseEvent (id=20) {
    "button": "left",
    "clickCount": 1,
    "modifiers": 0,
@@ -1238,23 +1435,23 @@
    "x": 304,
    "y": 148
 }
-[9.214][DEBUG]: DEVTOOLS RESPONSE Input.dispatchMouseEvent (id=20) {
+[9.249][DEBUG]: DEVTOOLS RESPONSE Input.dispatchMouseEvent (id=20) {
 
 }
-[9.214][INFO]: Waiting for pending navigations...
-[9.214][INFO]: Done waiting for pending navigations
-[9.214][INFO]: RESPONSE ClickElement
-[9.220][INFO]: COMMAND SetWindowSize {
+[9.249][INFO]: Waiting for pending navigations...
+[9.250][INFO]: Done waiting for pending navigations
+[9.250][INFO]: RESPONSE ClickElement
+[9.254][INFO]: COMMAND SetWindowSize {
    "height": 0,
-   "sessionId": "bff7d6e0f3b2aa95b6db58648a9c1287",
+   "sessionId": "30a95df6ef81427c042e6afac46b9c1f",
    "width": 0,
    "windowHandle": "current"
 }
-[9.220][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=12) {
+[9.255][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=11) {
    "expression": "(function() { // Copyright (c) 2012 The Chromium Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style license that can be\n// found in the LICENSE file.\n\n/**\n * Enum f...",
    "returnByValue": true
 }
-[9.223][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=12) {
+[9.257][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=11) {
    "result": {
       "type": "object",
       "value": {
@@ -1264,11 +1461,11 @@
    },
    "wasThrown": false
 }
-[9.224][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=13) {
+[9.258][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=12) {
    "expression": "(function() { // Copyright (c) 2012 The Chromium Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style license that can be\n// found in the LICENSE file.\n\n/**\n * Enum f...",
    "returnByValue": true
 }
-[9.227][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=13) {
+[9.260][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=12) {
    "result": {
       "type": "object",
       "value": {
@@ -1281,49 +1478,53 @@
    },
    "wasThrown": false
 }
-[9.227][INFO]: RESPONSE SetWindowSize
-[10.232][INFO]: COMMAND GetSource {
+[9.260][INFO]: RESPONSE SetWindowSize
+[9.264][INFO]: COMMAND GetSource {
 
 }
-[10.232][DEBUG]: DEVTOOLS EVENT DOM.childNodeCountUpdated {
-   "childNodeCount": 24,
-   "nodeId": 5
-}
-[10.232][DEBUG]: DEVTOOLS EVENT Console.messageAdded {
-   "message": {
-      "column": 0,
-      "level": "error",
-      "line": 0,
-      "networkRequestId": "9792.22",
-      "source": "network",
-      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT",
-      "timestamp": 1448282241.31179,
-      "type": "log",
-      "url": "https://pl106332.puhtml.com/04/6f/ee/046feea7677e520a728e778e5e927770.js"
-   }
-}
-[10.232][INFO]: Waiting for pending navigations...
-[10.233][INFO]: Done waiting for pending navigations
-[10.233][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=21) {
+[9.265][INFO]: Waiting for pending navigations...
+[9.265][INFO]: Done waiting for pending navigations
+[9.265][DEBUG]: DEVTOOLS COMMAND Runtime.evaluate (id=21) {
    "expression": "(function() { // Copyright (c) 2012 The Chromium Authors. All rights reserved.\n// Use of this source code is governed by a BSD-style license that can be\n// found in the LICENSE file.\n\n/**\n * Enum f...",
    "returnByValue": true
 }
-[10.395][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=21) {
+[9.267][DEBUG]: DEVTOOLS EVENT DOM.childNodeCountUpdated {
+   "childNodeCount": 24,
+   "nodeId": 5
+}
+[9.280][DEBUG]: DEVTOOLS RESPONSE Runtime.evaluate (id=21) {
    "result": {
       "type": "object",
       "value": {
          "status": 0,
-         "value": "\u003C!DOCTYPE html>\u003Chtml xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en-US\">\u003Chead>\n\u003Cscript type=\"text/javascript\" async=\"\" src=\"https://pl106332.puhtml.com/04/6f/ee/046feea7677e520a728e778e5e927770.js\">..."
+         "value": "\u003C!DOCTYPE html>\u003Chtml xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en-US\">\u003Chead>\n\u003Cscript type=\"text/javascript\" async=\"\" src=\"//c1.popads.net/pop.js\">\u003C/script>\u003Cscript type=\"text/javascript\" async=\"\" d..."
       }
    },
    "wasThrown": false
 }
-[10.395][INFO]: Waiting for pending navigations...
-[10.395][INFO]: Done waiting for pending navigations
-[10.395][INFO]: RESPONSE GetSource "\u003C!DOCTYPE html>\u003Chtml xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en-US\">\u003Chead>\n\u003Cscript type=\"text/javascript\" async=\"\" src=\"https://pl106332.puhtml.com/04/6f/ee/046feea7677e520a728e778e5e927770.js\">..."
-[10.406][INFO]: COMMAND Quit {
+[9.280][INFO]: Waiting for pending navigations...
+[9.280][DEBUG]: DEVTOOLS EVENT Console.messageAdded {
+   "message": {
+      "column": 0,
+      "level": "error",
+      "line": 0,
+      "networkRequestId": "8132.23",
+      "source": "network",
+      "text": "Failed to load resource: net::ERR_BLOCKED_BY_CLIENT",
+      "timestamp": 1448388356.4845,
+      "type": "log",
+      "url": "https://c1.popads.net/pop.js"
+   }
+}
+[9.280][DEBUG]: DEVTOOLS EVENT DOM.childNodeCountUpdated {
+   "childNodeCount": 25,
+   "nodeId": 5
+}
+[9.280][INFO]: Done waiting for pending navigations
+[9.280][INFO]: RESPONSE GetSource "\u003C!DOCTYPE html>\u003Chtml xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en-US\">\u003Chead>\n\u003Cscript type=\"text/javascript\" async=\"\" src=\"//c1.popads.net/pop.js\">\u003C/script>\u003Cscript type=\"text/javascript\" async=\"\" d..."
+[9.290][INFO]: COMMAND Quit {
 
 }
-[10.706][INFO]: RESPONSE Quit
-[10.707][DEBUG]: Log type 'driver' lost 0 entries on destruction
-[10.707][DEBUG]: Log type 'browser' lost 2 entries on destruction
+[9.603][INFO]: RESPONSE Quit
+[9.604][DEBUG]: Log type 'driver' lost 0 entries on destruction
+[9.604][DEBUG]: Log type 'browser' lost 4 entries on destruction

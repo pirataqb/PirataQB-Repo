@@ -26,34 +26,25 @@ from resources.lib.libraries import captcha
 def resolve(url):
     #try:
 
-        print(str("Eu quero isto : "+url))
-
         if check(url) == False: return
 
 
         id = re.compile('//.+?/(?:embed|f)/([0-9a-zA-Z-_]+)').findall(url)[0]
-        print(str("ID : "+id))
         url = 'https://api.openload.io/1/file/dlticket?file=%s' % id
-        print(str("URL2 : "+url))
         result = client.request(url)
-        print(str("Result : "+str(result)))
         result = json.loads(result)
-        print(str("Result2 : "+str(result)))
         cap = result['result']['captcha_url']
-        print("Desired Captcha : "+str(cap))
 
         if not cap == None: cap = captcha.keyboard(cap)
         time.sleep(result['result']['wait_time'])
 
         url = 'https://api.openload.io/1/file/dl?file=%s&ticket=%s' % (id, result['result']['ticket'])
 
-        print(str("Try : "+url))
         if not cap == None:
             url += '&captcha_response=%s' % urllib.quote(cap)
 
         result = client.request(url)
         result = json.loads(result)
-        print("Result2 : "+str(result))
 
         bigOne = str(result).split('{')
         for i in range(len(bigOne)):
@@ -63,15 +54,12 @@ def resolve(url):
                     for t in range(len(niceOne)):
                         if "u'https" in str(niceOne[t]):
                             Master = str(niceOne[t]).replace("u'","")+niceOne[t+1]
-                            print("MASTERONE : "+str(Master))
 
         #MasterUrl = urllib.unquote_plus(result["url"]).decode('utf-8')
 
         #print("This is?? : "+str(MasterUrl))
 
         url = result['result']['url'] + '?mime=true'
-
-        print(str("Este está resolvido : "+url))
 
         return url
     #except:print("Something Went Wrong? Too mutch dopwnloads??")
@@ -83,7 +71,6 @@ def check(url):
         url = 'https://openload.co/embed/%s/' % id
 
         result = client.request(url)
-        print("Your RES : "+result )
         if result == None: return False
         if '>We are sorry!<' in result: return False
         return True

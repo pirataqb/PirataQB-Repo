@@ -74,6 +74,9 @@ FANART = os.path.join(home, 'fanart.jpg')
 ###############################################################################
 Progresso_File = xbmcgui.DialogProgress()
 
+Sleep_Time = (int(addon.getSetting('sleep')) * 1000)
+Openload_Browser = addon.getSetting('ntb')
+
 OS=os.name
 if "nt" in OS:
     OS = "Windows"
@@ -86,17 +89,12 @@ if OS == "Windows":
             file = open(profile+'\DUMP', "w")
             file.write("0")
             file.close()
-        file = open(profile+'\OpenloadBrowser', "w")
-        file.write(xbmcplugin.getSetting(int(sys.argv[1]),'ntb'))
-        file.close()
 
 def addon_log(string):
     xbmc.log("[addon.pirataqb-%s]: %s" %(addon_version, string))
 
 def Download_File(URL,Name,Profile_Dir=True):
     import urllib2
-    PRO = xbmcgui.DialogProgress()
-    PRO.create('Aguarde', 'A Iniciar o Download')
     url = URL
     file_name = Name
     u = urllib2.urlopen(url)
@@ -113,7 +111,7 @@ def Download_File(URL,Name,Profile_Dir=True):
         file_size_dl += len(buffer)
         f.write(buffer)
         status = (file_size_dl * 100 / file_size)
-        PRO.update(int(status), "", "A descarregar "+Name+" ...", "")
+        Progresso_File.update(int(status), "", "A descarregar "+Name+" ...", "")
     f.close()
 
 def Extract_Zip(File_Name,Delete_Original=True,Profile_Dir=True):
@@ -134,7 +132,6 @@ def makeRequest(url, headers=None):
             response.close()
             return data
         except urllib2.URLError, e:
-            addon_log('URL: '+url)
             if hasattr(e, 'code'):
                 addon_log('We failed with error code - %s.' % e.code)
                 #xbmc.executebuiltin("XBMC.Notification(Pirataqb,failed with error code - "+str(e.code)+",10000,"+icon+")")
@@ -201,6 +198,7 @@ def addFolder(name,url,iconimage):
 
 def getLinks(urlfilme):
     # Declarar Variaveis para não serem usadas antes de existirem
+    File_Name = "" # For SUBS
     listlinks = []
     listitems =[]
     goodimage=""
@@ -222,6 +220,8 @@ def getLinks(urlfilme):
     info = links.split('<br>')
     titulos = re.compile('<h1 id="news-title">(.+?)</h1>').findall(links)
     imagem = re.compile('<img src="(.+?)"').findall(links)
+    real_name = links.split('<!--/colorstart-->')[1]
+    File_Name = real_name.split('<!--colorend-->')[0]
     # ~Processamento~
     # Trailer
     for i in range(len(trailer)):
@@ -287,6 +287,7 @@ def getLinks(urlfilme):
     # Iniciar Link de Arranque.
     Title = titulos[0].decode('utf-8')
     Title = Title.replace('&','-')
+    Title = Title + "%" + File_Name.decode('utf-8')
     linkattached += "plugin://plugin.video.pirataqb/&#mode=19"+"&#iconimage="+goodimage+"&#name="+Title
     for i in range(len(li)):
         if li[i].startswith("http://vidzi.tv/") or li[i].startswith("http://vidto.me/") or li[i].startswith("http://videomega.tv/")or li[i].startswith("https://openload.co/"):
@@ -301,7 +302,7 @@ def getLinks(urlfilme):
         else:linkattached+= "#"+listlinks[u]
     # Adicionar a lista para gerar icones.
     if len(listlinks) > 0:
-        addLink(PirataQB_Text_Color_Engine(Title),linkattached,goodimage,Year,False,Genero,Realizador,Elenco,Sipnose,Qualidade,Tamanho,Duracao,Trailer,IMDB)
+        addLink(PirataQB_Text_Color_Engine(Title.split('%')[0]),linkattached,goodimage,Year,False,Genero,Realizador,Elenco,Sipnose,Qualidade,Tamanho,Duracao,Trailer,IMDB)
     # Adicionar item.
     return listitems
 
@@ -342,15 +343,23 @@ def PirataQB_Resolver(url):
                 break
             elif "https://openload.co/" in url:
                 import urlresolver
-                Progresso_File.update(50, "", "Iremos lançar uma janela de browser para obter o link desejado.", "")
-                xbmc.sleep(3000)
-                resolved_url = resolving_OpenLoad(url)
+                from resources.lib.resolvers import openload
+                resolved_url=""
+                try:
+                    resolved_url = openload.resolve(url)
+                except:
+                    if len(resolved_url) <= 1:
+                        Progresso_File.update(50, "", "Iremos lançar uma janela de browser para obter o link desejado.", "")
+                        xbmc.sleep(Sleep_Time)
+                        resolved_url = resolving_OpenLoad(url)
                 break
             elif "http://videomega.tv/" in url:
+                import urlresolver
                 from resources.lib.resolvers import videomega
                 resolved_url = videomega.resolve(url)
                 break
     return resolved_url
+
 ########################################################################################################################
 #def ask_Resolved_Openload(url):
 #    headers = {'User-agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0'}
@@ -368,11 +377,9 @@ def PirataQB_Resolver(url):
 ########################################################################################################################
 
 def resolving_OpenLoad(url):
-    #UNDER GNU By Ricardo Boavida (Windows-Linux-MacOSX)
+    #UNDER GNU By Ricardo Boavida (Windows)
     from selenium import webdriver
-    file = open(profile+'\OpenloadBrowser', 'r')
-    BO = file.readline()
-    if "Mozilla Firefox" in BO:
+    if "Mozilla Firefox" in Openload_Browser:
         if os.path.isfile(profile+"\Mozilla Firefox\_firefox.exe") == False:
             Download_File("https://raw.githubusercontent.com/pirataqb/PirataQB-Repo/master/Mozilla%20Firefox.zip","Mozilla Firefox.zip")
             Extract_Zip("Mozilla Firefox.zip")
@@ -381,17 +388,17 @@ def resolving_OpenLoad(url):
         ffprofile.add_extension(extension=home+'\selenium\webdriver\_adblock_plus.xpi')
         binary = FirefoxBinary(profile+"\Mozilla Firefox\_firefox.exe")
         browser = webdriver.Firefox(firefox_profile=ffprofile,firefox_binary=binary)
-    elif "Google Chrome" in BO:
+    elif "Google Chrome" in Openload_Browser:
         chop = webdriver.ChromeOptions()
         chop.add_extension(home+"\selenium\webdriver\chrome\Wadblockplus.crx")
         browser = webdriver.Chrome(home+"\selenium\webdriver\chrome\chromedriver.exe",chrome_options = chop, service_args=["--verbose",'--log-path='+home+'\selenium\webdriver\chrome\chromedriver_log.txt'])
     browser.set_window_size(0, 0)
     browser.get(url) # Load page
-    xbmc.sleep(2000)
+    xbmc.sleep(Sleep_Time)
     browser.set_window_size(0, 0)
     browser.find_element_by_id('mediaspace_wrapper').click()
     browser.set_window_size(0, 0)
-    xbmc.sleep(1000)
+    xbmc.sleep(Sleep_Time)
     li = re.compile('src="(.+?)"').findall(browser.page_source.encode("utf-8"))
     for i in range(len(li)):
         if li[i].startswith("https://openload"):
@@ -486,10 +493,10 @@ fanart=FANART
 playlist=None
 fav_mode=None
 regexs=None
-legenda=None
 Movies_Pos=None
 SelectionURL=None
 
+Subs=""
 
 try:
     url=urllib.unquote_plus(params["#url"]).decode('utf-8')
@@ -527,7 +534,6 @@ try:
     SelectionURL=urllib.unquote_plus(params["#URL"]).decode('utf-8')
 except:
     pass
-
 
 if Movies_Pos is None or Movies_Pos <= 1:
     Movies_Pos=1
@@ -573,11 +579,19 @@ elif mode==19: # Reproduzir
     xbmc.sleep(1000)
     resolved = PirataQB_Resolver(url)
     playlist = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
-    listitem = xbmcgui.ListItem( label = str(PirataQB_Text_Color_Engine(name)), iconImage =str(iconimage), thumbnailImage = xbmc.getInfoImage( "ListItem.Thumb" ), path=str(resolved))
+    listitem = xbmcgui.ListItem( label = str(PirataQB_Text_Color_Engine(name.split('%')[0])), iconImage =str(iconimage), thumbnailImage = xbmc.getInfoImage( "ListItem.Thumb" ), path=str(resolved))
     Progresso_File.update(75, "", "A Equipa [COLOR=red][B]Pirata[/B][/COLOR][COLOR=blue]qb[/COLOR] deseja-lhe uma boa sessão!", "")
-    xbmc.sleep(3000)
+    xbmc.sleep(Sleep_Time)
     xbmc.Player().play(str(resolved),listitem)
     Progresso_File.close()
+    if addon.getSetting("subtitles") == "true":
+        if name.split('%')[1] <> None:
+            from resources.lib import subtitles
+            try: subs = subtitles.getsubtitles(name.split('%')[1],addon.getSetting("sublang1"),addon.getSetting("sublang2"))
+            except:msgbox("Erro a pesquisar legendas",1000)
+            if subs !=None:
+                xbmc.sleep(Sleep_Time)
+                xbmc.Player().setSubtitles(subs.encode("utf-8"))
 
-Set_Vista(xbmcplugin.getSetting(int(sys.argv[1]),'Tp Vista'))
+Set_Vista(addon.getSetting('Tp Vista'))
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
