@@ -28,8 +28,6 @@ import re
 import os
 import xbmcplugin,xbmcgui,xbmc,xbmcaddon,xbmcgui
 
-
-
 Pirataqb_Host_List = ['http://vidto.me/','http://vidzi.tv/','https://openload.co/','http://videomega.tv/']
 
 class NoRedirection(urllib2.HTTPErrorProcessor):
@@ -83,12 +81,22 @@ if "nt" in OS:
 
 if OS == "Windows":
     if len(xbmcplugin.getSetting(int(sys.argv[1]),'ntb')) > 1:
-        if os.path.isfile(profile+'\DUMP') == False:
+        if os.path.isfile(profile+'\DUMP') == False and "Google Chrome" in Openload_Browser:
             dialog = xbmcgui.Dialog()
-            ok = dialog.ok('PirataQB', 'Caso não tenha instalado o Browser Predefenido, aconcelhamos que o instale para o bom funcionamento do Script.')
+            ok = dialog.ok('PirataQB '+addon_version, 'Caso não tenha instalado o Browser Predefenido, aconcelhamos que o instale para o bom funcionamento do Script.')
             file = open(profile+'\DUMP', "w")
             file.write("0")
             file.close()
+
+if os.path.isfile(profile+'\DUMPMSG_V'+addon_version) == False:
+    file = open(home+'\README.txt', "r")
+    content = file.readline()
+    dialog = xbmcgui.Dialog()
+    ok = dialog.ok('PirataQB '+addon_version,content)
+    file = open(profile+'\DUMPMSG_V'+addon_version, "w")
+    file.write("0")
+    file.close()
+
 
 def addon_log(string):
     xbmc.log("[addon.pirataqb-%s]: %s" %(addon_version, string))
@@ -291,10 +299,8 @@ def getLinks(urlfilme):
     linkattached += "plugin://plugin.video.pirataqb/&#mode=19"+"&#iconimage="+goodimage+"&#name="+Title
     for i in range(len(li)):
         if li[i].startswith("http://vidzi.tv/") or li[i].startswith("http://vidto.me/") or li[i].startswith("http://videomega.tv/")or li[i].startswith("https://openload.co/"):
-            if li[i].startswith("https://openload.co/"):
-                if OS == "Windows":
-                    listlinks.append(li[i])
-            else:listlinks.append(li[i])
+            listlinks.append(li[i])
+        else:pass
     # Adicionar Links com separador.
     for u in range(len(listlinks)):
         if u == 0:
@@ -334,13 +340,20 @@ def PirataQB_Resolver(url):
     for i in range(len(Pirataqb_Host_List)):
         if Pirataqb_Host_List[i] in url:
             if "http://vidto.me/" in url:
-                from resources.lib.resolvers import vidto
-                resolved_url = vidto.resolve(url)
-                break
+                try:
+                    from resources.lib.resolvers import vidto
+                    resolved_url = vidto.resolve(url)
+                except:
+                    import urlresolver
+                    resolved_url = urlresolver.resolve(url)
             elif "http://vidzi.tv/" in url:
-                import urlresolver
-                resolved_url = urlresolver.resolve(url)
-                break
+                try:
+                    import urlresolver
+                    resolved_url = urlresolver.resolve(url)
+                except:
+                    import urlresolver
+                    from resources.lib.resolvers import vidzi
+                    resolved_url = vidzi.resolve(url)
             elif "https://openload.co/" in url:
                 import urlresolver
                 from resources.lib.resolvers import openload
@@ -348,16 +361,17 @@ def PirataQB_Resolver(url):
                 try:
                     resolved_url = openload.resolve(url)
                 except:
-                    if len(resolved_url) <= 1:
+                    if len(resolved_url) <= 1 and OS == "Windows":
                         Progresso_File.update(50, "", "Iremos lançar uma janela de browser para obter o link desejado.", "")
                         xbmc.sleep(Sleep_Time)
                         resolved_url = resolving_OpenLoad(url)
-                break
             elif "http://videomega.tv/" in url:
                 import urlresolver
-                from resources.lib.resolvers import videomega
-                resolved_url = videomega.resolve(url)
-                break
+                try:
+                    from resources.lib.resolvers import videomega
+                    resolved_url = videomega.resolve(url)
+                except:
+                    resolved_url = urlresolver.resolve(url)
     return resolved_url
 
 ########################################################################################################################
@@ -585,13 +599,17 @@ elif mode==19: # Reproduzir
     xbmc.Player().play(str(resolved),listitem)
     Progresso_File.close()
     if addon.getSetting("subtitles") == "true":
-        if name.split('%')[1] <> None:
-            from resources.lib import subtitles
-            try: subs = subtitles.getsubtitles(name.split('%')[1],addon.getSetting("sublang1"),addon.getSetting("sublang2"))
-            except:msgbox("Erro a pesquisar legendas",1000)
+        if len(name.split('%')) > 0:
+            try:
+                print("My Subs Name are : "+name.split('%')[1])
+                from resources.lib import subtitles
+                try: subs = subtitles.getsubtitles(name.split('%')[1],addon.getSetting("sublang1"),addon.getSetting("sublang2"))
+                except:msgbox("Erro a pesquisar legendas",1000)
+            except:pass
             if subs !=None:
                 xbmc.sleep(Sleep_Time)
                 xbmc.Player().setSubtitles(subs.encode("utf-8"))
+        else:print("TOTAL NAME OF FAIL : "+name)
 
 Set_Vista(addon.getSetting('Tp Vista'))
 xbmcplugin.endOfDirectory(int(sys.argv[1]))

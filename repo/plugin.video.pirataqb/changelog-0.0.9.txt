@@ -1,5 +1,0 @@
-############### Version 1.0.0 ###############
-# Análise de Resolver's avançada            #
-# Procura de Legenda automática             #
-# Resolver de Openload próprio              #
-#############################################
