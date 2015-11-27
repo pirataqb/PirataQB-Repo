@@ -1,0 +1,1 @@
+\Registry\Machine\SYSTEM\CurrentControlSet\services\sopcastp2p\Parameters [1 5 7 17]
