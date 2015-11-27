@@ -90,7 +90,7 @@ if OS == "Windows":
 
 if os.path.isfile(profile+'\DUMPMSG_V'+addon_version) == False:
     file = open(home+'\README.txt', "r")
-    content = file.readline()
+    content = file.readall()
     dialog = xbmcgui.Dialog()
     ok = dialog.ok('PirataQB '+addon_version,content)
     file = open(profile+'\DUMPMSG_V'+addon_version, "w")
@@ -325,15 +325,28 @@ def PirataQB_Text_Color_Engine(Texto):
     return masterstring
 
 def GetQBPage(URL,Page):
+    if Page <= 0:
+        Page = 1
+    FixedPage = Page
+    PageCounter = 1
     progress = xbmcgui.DialogProgress()
     progress.create('Aguarde', 'A Carregar Lista')
-    links = getFilmesqb(URL,Page)
-    for i in range(len(links)):
-        getLinks(links[i])
-        progress.update((i*100)/len(links), "", "", "")
+    Counter = Page
+    Actual = Counter
+    for Counter in range(Page,Page+int(addon.getSetting("paginas"))):
+        Page = Counter
+        links = getFilmesqb(URL,Page)
+        for i in range(len(links)):
+            getLinks(links[i])
+            if int(addon.getSetting("paginas")) > 1:
+                MSG_Paginas = "                                                 Página : "+str(int(PageCounter))+"/"+str(int(addon.getSetting("paginas")))
+            else:MSG_Paginas=""
+            progress.update(((Actual*100)*int(addon.getSetting("paginas"))/(len(links)*int(addon.getSetting("paginas")))/int(addon.getSetting("paginas"))), MSG_Paginas,"                             Estamos a verificar a Página : "+str(Page), "")
+            Actual += 1
+        PageCounter += 1
     progress.close()
     if test_next_page(URL,Page): # Evitar saltar para o espaço.
-        addLink("[COLOR=red][B][I]página[/I][/B][/COLOR] [COLOR=blue][B][I]seguinte[/I][/B][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&URL="+URL+"&movies_pos="+str(int(Page)+1),icon_pagina_seguinte,"2015",True)
+        addLink("[COLOR=red][B][I]página[/I][/B][/COLOR] [COLOR=blue][B][I]seguinte[/I][/B][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&URL="+URL+"&movies_pos="+str(int(FixedPage+int(addon.getSetting("paginas")))),icon_pagina_seguinte,"2015",True)
 
 def PirataQB_Resolver(url):
     resolved_url=None
@@ -564,6 +577,7 @@ if mode==None: # Menu
 
 elif mode==1: # Pesquisar
     GetQBPage(SelectionURL,int(Movies_Pos))
+    xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 elif mode==2: # Separador Generos
     addFolder("[COLOR=red]Aç[COLOR=blue]ão[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/acao/",icon_MenuGeneros_acao)
