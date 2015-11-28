@@ -180,7 +180,7 @@ def getFilmesqb(url,pagina):
         url +='page/'+str(pagina)+'/'
     filmes = []
     http = makeRequest(url)
-    http1 = re.compile('<h1><a href="(.+?)"').findall(http)
+    http1 = re.compile('<div class="list-title"><a href="(.+?)">').findall(http)
     for i in range(len(http1)):
         filme = http1[i]
         if len(filme.split('#')) > 0:
