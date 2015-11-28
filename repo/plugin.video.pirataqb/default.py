@@ -90,9 +90,9 @@ if OS == "Windows":
 
 if os.path.isfile(profile+'\DUMPMSG_V'+addon_version) == False:
     file = open(home+'\README.txt', "r")
-    content = file.readall()
+    content = file.read()
     dialog = xbmcgui.Dialog()
-    ok = dialog.ok('PirataQB '+addon_version,content)
+    ok = dialog.ok('PirataQB '+addon_version,content.decode('utf-8'))
     file = open(profile+'\DUMPMSG_V'+addon_version, "w")
     file.write("0")
     file.close()
@@ -330,18 +330,19 @@ def GetQBPage(URL,Page):
     FixedPage = Page
     PageCounter = 1
     progress = xbmcgui.DialogProgress()
-    progress.create('Aguarde', 'A Carregar Lista')
-    Counter = Page
-    Actual = Counter
+    progress.create('Aguarde', '')
+    #Counter = Page
+    Actual = 0
     for Counter in range(Page,Page+int(addon.getSetting("paginas"))):
         Page = Counter
         links = getFilmesqb(URL,Page)
         for i in range(len(links)):
             getLinks(links[i])
             if int(addon.getSetting("paginas")) > 1:
-                MSG_Paginas = "                                                 Página : "+str(int(PageCounter))+"/"+str(int(addon.getSetting("paginas")))
+                MSG_Paginas = "                                                 Página : [COLOR=blue]"+str(int(PageCounter))+"[/COLOR]/[COLOR=red]"+str(int(addon.getSetting("paginas")))+"[/COLOR]"
             else:MSG_Paginas=""
-            progress.update(((Actual*100)*int(addon.getSetting("paginas"))/(len(links)*int(addon.getSetting("paginas")))/int(addon.getSetting("paginas"))), MSG_Paginas,"                             Estamos a verificar a Página : "+str(Page), "")
+            Percentage = ((Actual*100)*int(addon.getSetting("paginas"))/(len(links)*int(addon.getSetting("paginas")))/int(addon.getSetting("paginas")))
+            progress.update(Percentage, MSG_Paginas,"                             Estamos a verificar a Página : [COLOR=blue]"+str(Page)+"[/COLOR]", "")
             Actual += 1
         PageCounter += 1
     progress.close()
