@@ -333,21 +333,24 @@ def GetQBPage(URL,Page):
     progress.create('Aguarde', '')
     #Counter = Page
     Actual = 0
-    for Counter in range(Page,Page+int(addon.getSetting("paginas"))):
+    PagesLoaded = int(addon.getSetting("paginas"))
+    for Counter in range(Page,Page+PagesLoaded):
         Page = Counter
         links = getFilmesqb(URL,Page)
         for i in range(len(links)):
             getLinks(links[i])
-            if int(addon.getSetting("paginas")) > 1:
-                MSG_Paginas = "                                                 Página : [COLOR=blue]"+str(int(PageCounter))+"[/COLOR]/[COLOR=red]"+str(int(addon.getSetting("paginas")))+"[/COLOR]"
+            if PagesLoaded > 1:
+                MSG_Paginas = "                                                 Página : [COLOR=blue]"+str(int(PageCounter))+"[/COLOR]/[COLOR=red]"+str(PagesLoaded)+"[/COLOR]"
             else:MSG_Paginas=""
-            Percentage = ((Actual*100)*int(addon.getSetting("paginas"))/(len(links)*int(addon.getSetting("paginas")))/int(addon.getSetting("paginas")))
+            Percentage = ((Actual*100)*PagesLoaded/(len(links)*PagesLoaded)/PagesLoaded)
             progress.update(Percentage, MSG_Paginas,"                             Estamos a verificar a Página : [COLOR=blue]"+str(Page)+"[/COLOR]", "")
             Actual += 1
         PageCounter += 1
+        if test_next_page(URL,Page) == False:
+            break
     progress.close()
     if test_next_page(URL,Page): # Evitar saltar para o espaço.
-        addLink("[COLOR=red][B][I]página[/I][/B][/COLOR] [COLOR=blue][B][I]seguinte[/I][/B][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&URL="+URL+"&movies_pos="+str(int(FixedPage+int(addon.getSetting("paginas")))),icon_pagina_seguinte,"2015",True)
+        addLink("[COLOR=red][B][I]página[/I][/B][/COLOR] [COLOR=blue][B][I]seguinte[/I][/B][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&URL="+URL+"&movies_pos="+str(int(FixedPage+PagesLoaded)),icon_pagina_seguinte,"2015",True)
 
 def PirataQB_Resolver(url):
     resolved_url=None
