@@ -84,19 +84,19 @@ if "nt" in OS:
 
 if OS == "Windows":
     if len(xbmcplugin.getSetting(int(sys.argv[1]),'ntb')) > 1:
-        if os.path.isfile(profile+'\DUMP') == False and "Google Chrome" in Openload_Browser:
+        if os.path.isfile(home+'\DUMP') == False and "Google Chrome" in Openload_Browser:
             dialog = xbmcgui.Dialog()
             ok = dialog.ok('PirataQB '+addon_version, 'Caso não tenha instalado o Browser Predefenido, aconcelhamos que o instale para o bom funcionamento do Script.')
-            file = open(profile+'\DUMP', "w")
+            file = open(home+'\DUMP', "w")
             file.write("0")
             file.close()
 
-if os.path.isfile(profile+'\DUMPMSG_V'+addon_version) == False:
+if os.path.isfile(home+'\DUMPMSG_V'+addon_version) == False:
     file = open(home+'\README.txt', "r")
     content = file.read()
     dialog = xbmcgui.Dialog()
     ok = dialog.ok('PirataQB '+addon_version,content.decode('utf-8'))
-    file = open(profile+'\DUMPMSG_V'+addon_version, "w")
+    file = open(home+'\DUMPMSG_V'+addon_version, "w")
     file.write("0")
     file.close()
 

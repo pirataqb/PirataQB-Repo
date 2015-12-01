@@ -1,0 +1,7 @@
+﻿********* Version 1.0.0 *********
+# Análise de Resolver's avançada              
+# Procura de Legenda automática             
+# Resolver de Openload próprio              
+# Pesquisa de páginas em massa              
+# Pesquisa Avançada
+# Melhoramento na velocidade de pesquisa
