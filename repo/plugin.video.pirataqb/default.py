@@ -97,12 +97,12 @@ if os.path.isfile(profile+'/WELCOME') == False:
     content = file.read()
     dialog = xbmcgui.Dialog()
     ok = dialog.ok('PirataQB '+addon_version,content.decode('utf-8'))
-    file = open(profile+'/WELCOME'"w")
+    file = open(profile+'/WELCOME',"w")
     file.write("0")
     file.close()
 
 if os.path.isfile(profile+'/DUMPMSG_V'+addon_version) == False:
-    file = open(profile+'/changelog.txt', "r")
+    file = open(home+'/changelog.txt', "r")
     content = file.read()
     dialog = xbmcgui.Dialog()
     ok = dialog.ok('PirataQB '+addon_version,content.decode('utf-8'))
