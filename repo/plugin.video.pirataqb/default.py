@@ -22,11 +22,14 @@
 #Antes de mais, os melhores agradeçimentos ao staff PirataQB!#
 ##############################################################
 
+
+## By Strings but Working =D
+
 import urllib
 import urllib2
 import re
 import os
-import xbmcplugin,xbmcgui,xbmc,xbmcaddon,xbmcgui
+import xbmcplugin,xbmcgui,xbmc,xbmcaddon,xbmcgui,requests,cookielib
 
 Pirataqb_Host_List = ['http://vidto.me/','http://vidzi.tv/','https://openload.co/','http://videomega.tv/']
 
@@ -130,25 +133,18 @@ def Extract_Zip(File_Name,Delete_Original=True,Profile_Dir=True):
     if Delete_Original == True:
         os.remove(path)
 
+
+
 def makeRequest(url, headers=None):
-        try:
-            if headers is None:
-                headers = {'User-agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0'}
-            req = urllib2.Request(url,None,headers)
-            response = urllib2.urlopen(req)
-            data = response.read()
-            response.close()
-            return data
-        except urllib2.URLError, e:
-            if hasattr(e, 'code'):
-                addon_log('We failed with error code - %s.' % e.code)
-                #xbmc.executebuiltin("XBMC.Notification(Pirataqb,failed with error code - "+str(e.code)+",10000,"+icon+")")
-                msgbox("Erro de Ligação %s." % e.code,1000)
-            elif hasattr(e, 'reason'):
-                addon_log('We failed to reach a server.')
-                addon_log('Reason: %s' %e.reason)
-                #xbmc.executebuiltin("XBMC.Notification(Pirataqb,failed to reach the server. - "+str(e.reason)+",10000,"+icon+")")
-                msgbox("Erro de Ligação %s." % e.reason,1000)
+    try:
+        if headers is None:
+            headers = {'User-agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0'}
+        req = urllib2.Request(url,None,headers)
+        response = urllib2.urlopen(req)
+        data = response.read()
+        response.close()
+        return data
+    except: return ""
 
 
 def get_params():
@@ -174,38 +170,8 @@ def get_params():
 def msgbox(texto,tempo):
     xbmc.executebuiltin("XBMC.Notification(PirataQB,"+str(texto)+","+str(tempo)+","+icon+")")
 
-def getFilmesqb(url,pagina):
-    #StaticUrl = url
-    if pagina !=0:
-        url +='page/'+str(pagina)+'/'
-    filmes = []
-    http = makeRequest(url)
-    http1 = re.compile('<div class="list-title"><a href="(.+?)">').findall(http)
-    for i in range(len(http1)):
-        filme = http1[i]
-        if len(filme.split('#')) > 0:
-            filme = filme.split('#')[0]
-            filmes.append(filme)
-    return filmes
 
-def addLink(name,url,iconimage,ano="",folder=False,Genero="",Realizador="",Elenco="",Sipnose="",Qualidade="",Tamanho="",Duracao="",Trailer="",IMDB=""):
-	ok=True
-	liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
-	liz.setProperty('fanart_image', iconimage)
-	liz.setInfo( type="Video", infoLabels={ "Title": name ,'Trailer': "plugin://plugin.video.youtube/play/?video_id="+Trailer, "Year": ano,"Rating":IMDB , "Genre": Genero, "Director": Realizador, "Plot": "[COLOR=red]Sinop[COLOR=blue]se[/COLOR][/COLOR] : "+Sipnose+"\r\n"+"[COLOR=red]Elen[COLOR=blue]co[/COLOR][/COLOR] : "+Elenco+"\r\n"+"[COLOR=red]Quali[COLOR=blue]dade[/COLOR][/COLOR] : "+Qualidade+"\r\n"+"[COLOR=red]Tamanho [COLOR=blue]Total[/COLOR][/COLOR] : "+Tamanho+"\r\n"+"[COLOR=red]Dura[COLOR=blue]ção[/COLOR][/COLOR] : "+Duracao} )
-	ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=folder)
-	return ok
-
-def addFolder(name,url,iconimage):
-	ok=True
-	liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
-	liz.setProperty('fanart_image', iconimage)
-	liz.setInfo( type="Video", infoLabels={ "Title": name} )
-	ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=True)
-	return ok
-
-def getLinks(urlfilme):
-    # Declarar Variaveis para não serem usadas antes de existirem
+def Info_By_Link(urlfilme):
     File_Name = "" # For SUBS
     listlinks = []
     listitems =[]
@@ -227,9 +193,12 @@ def getLinks(urlfilme):
     trailer = re.compile('<a href="(.+?)" target="_blank">').findall(links)
     info = links.split('<br>')
     titulos = re.compile('<h1 id="news-title">(.+?)</h1>').findall(links)
+    print("TITULOS : "+str(titulos))
     imagem = re.compile('<img src="(.+?)"').findall(links)
-    real_name = links.split('<!--/colorstart-->')[1]
-    File_Name = real_name.split('<!--colorend-->')[0]
+    try:
+        real_name = links.split('<!--/colorstart-->')[1]
+        File_Name = real_name.split('<!--colorend-->')[0]
+    except:File_Name=""
     # ~Processamento~
     # Trailer
     for i in range(len(trailer)):
@@ -312,16 +281,147 @@ def getLinks(urlfilme):
     # Adicionar item.
     return listitems
 
+########################################################################################################################
+
+
+# Pesquisa
+def Pesquisa_De_Filmes(Filme):
+    Url_Pesquisa = 'http://www.pirataqb.com/index.php?story={'+Filme+'}&catlist[]=2&catlist[]=14&do=search&subaction=search'
+    # Fazer Lista de Filmes com este Link
+    Pedido = makeRequest(Url_Pesquisa)
+    Info =  Pedido.split('<h1>')#re.compile('<a href="(.+?)">(.+?)</a>').findall(Pedido)
+    Percentage = 0
+    progress = xbmcgui.DialogProgress()
+    progress.create('A Carregar', '')
+    for i in range(len(Info)):
+        if '<a href="' in Info[i]:
+            End = Info[i].split('</h1>')[0]
+            if ".html" in End:
+                if '"' in End:
+                    End = End.split('"')[1]
+                    End = End.split('"')[0]
+                    Info_By_Link(End)
+
+
+
+def getFilmesqb(url,pagina):
+        if pagina !=0:
+            url +='page/'+str(pagina)+'/'
+        Realizador=""
+        Imagem=""
+        Nome_Real=""
+        Year=""
+        Genero=""
+        Elenco=""
+        Sipnose=""
+        Qualidade=""
+        Tamanho=""
+        Duracao=""
+        Youtube_Trailer=""
+        Titulo_Real=""
+        IMDB=""
+        http = makeRequest(url)
+        Splited_to_Get_Link = http.split('<div class="cover-item">')
+        for i in range(len(Splited_to_Get_Link)):
+            Lista_de_Links = []
+            BruteInfo = Splited_to_Get_Link[i]
+            _Links = re.compile('<a href="(.+?)"').findall(BruteInfo)
+            _RealName = re.compile('<!--/colorstart-->(.+?)<!--colorend-->').findall(BruteInfo)
+            _Titulo = re.compile('<img src="(.+?)" alt="(.+?)" title="(.+?)"  />').findall(BruteInfo)
+            _Ano = re.compile('<b>Ano:</b>(.+?)<br />').findall(BruteInfo)
+            _Ranking_IMDB = re.compile('<br /><b>(.+?)</b> / 10<br />').findall(BruteInfo)
+            _Duracao_e_Tamanho = re.compile('<br /><b>Tamanho Total:</b>(.+?)<br /><b>Duração:</b>(.+?)<br />').findall(BruteInfo)
+            _Qalidade = re.compile('<br /><b>Qualidade:</b>(.+?)<br />').findall(BruteInfo)
+            _Genero = re.compile('<br /><b>Género:</b>(.+?)<br />').findall(BruteInfo)
+            _Elenco_Realizacao = re.compile('<b>Realizador:</b>(.+?)<br /><b>Elenco:</b>(.+?)<br /><br />').findall(BruteInfo)
+            _Sipnose = re.compile('<img src="/images/sinopse.png" alt="(.+?)" title="(.+?)"  /><!--dle_image_end--><br /><br />(.+?)<br /><br />').findall(BruteInfo)
+            for i in range(len(_Sipnose)):
+                for u in range(len(_Sipnose[i])):
+                    if u == 2: Sipnose = _Sipnose[i][u]
+            for i in range(len(_Elenco_Realizacao)):
+                for u in range(len(_Elenco_Realizacao[i])):
+                    if u == 0:Realizador= _Elenco_Realizacao[i][u]
+                    else:Elenco= _Elenco_Realizacao[i][u]
+            for i in range(len(_Genero)):
+                Genero = _Genero[i]
+            for i in range(len(_Qalidade)):
+                Qualidade = _Qalidade[i]
+            for i in range(len(_Duracao_e_Tamanho)):
+                for u in range(len(_Duracao_e_Tamanho[i])):
+                    if u ==0:Tamanho = _Duracao_e_Tamanho[i][u]
+                    else:Duracao = _Duracao_e_Tamanho[i][u]
+            for i in range(len(_Ranking_IMDB)):
+                IMDB = _Ranking_IMDB[i]
+            for i in range(len(_Ano)):
+                Year = _Ano[i]
+            for i in range(len(_Titulo)):
+                for u in range(len(_Titulo[i])):
+                    if u == 0:
+                        Imagem = _Titulo[i][u]
+                    if u > 0 :
+                        Titulo_Real = _Titulo[i][u]
+                        Titulo_Real = Titulo_Real.replace('amp;','')
+                        Titulo_Real = Titulo_Real.replace('&','-')
+                        break
+                if len(Titulo_Real) > 0:
+                    break
+            for i in range(len(_RealName)):
+                Nome_Real = _RealName[i]
+                break
+            Titulo_Real = Titulo_Real.replace('&','-')
+            Titulo_Real = Titulo_Real + "%" + Nome_Real
+            for i in range(len(_Links)):
+                    Links_Corretos = _Links[i]
+                    if "http://www.imdb.com/" in Links_Corretos:
+                       IMDB_Link = Links_Corretos
+                    elif "https://www.youtube.com/" in Links_Corretos:
+                        Youtube_Trailer = Links_Corretos
+                        Youtube_Trailer = Youtube_Trailer.split('=')[1]
+                    elif "http://vidto.me/" in Links_Corretos:
+                        Vidto_Link = Links_Corretos
+                        Lista_de_Links.append(Vidto_Link)
+                    elif "http://vidzi.tv/" in Links_Corretos:
+                        Vidzi_Link = Links_Corretos
+                        Lista_de_Links.append(Vidzi_Link)
+                    elif "https://openload.co/" in Links_Corretos:
+                        Openload_Link = Links_Corretos
+                        Lista_de_Links.append(Openload_Link)
+                    elif "http://videomega.tv/" in Links_Corretos:
+                        Videomega_Link = Links_Corretos
+                        Lista_de_Links.append(Videomega_Link)
+            linkattached = "plugin://plugin.video.pirataqb/&#mode=19"+"&#iconimage="+Imagem+"&#name="+Titulo_Real
+            for u in range(len(Lista_de_Links)):
+                if u == 0:linkattached+= "&#url="+Lista_de_Links[u]
+                else:linkattached+= "#"+Lista_de_Links[u]
+            if len(Titulo_Real) >= 2:
+                addLink(PirataQB_Text_Color_Engine(Titulo_Real.split('%')[0]),linkattached,Imagem,Year,False,Genero,Realizador,Elenco,Sipnose,Qualidade,Tamanho,Duracao,Youtube_Trailer,IMDB)
+        return Splited_to_Get_Link
+
+
+def addLink(name,url,iconimage,ano="",folder=False,Genero="",Realizador="",Elenco="",Sipnose="",Qualidade="",Tamanho="",Duracao="",Trailer="",IMDB=""):
+	ok=True
+	liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
+	liz.setProperty('fanart_image', iconimage)
+	liz.setInfo( type="Video", infoLabels={ "Title": name ,'Trailer': "plugin://plugin.video.youtube/play/?video_id="+Trailer, "Year": ano,"Rating":IMDB , "Genre": Genero, "Director": Realizador, "Plot": "[COLOR=red]Sinop[COLOR=blue]se[/COLOR][/COLOR] : "+Sipnose+"\r\n"+"[COLOR=red]Elen[COLOR=blue]co[/COLOR][/COLOR] : "+Elenco+"\r\n"+"[COLOR=red]Quali[COLOR=blue]dade[/COLOR][/COLOR] : "+Qualidade+"\r\n"+"[COLOR=red]Tamanho [COLOR=blue]Total[/COLOR][/COLOR] : "+Tamanho+"\r\n"+"[COLOR=red]Dura[COLOR=blue]ção[/COLOR][/COLOR] : "+Duracao} )
+	ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=folder)
+	return ok
+
+def addFolder(name,url,iconimage):
+	ok=True
+	liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
+	liz.setProperty('fanart_image', iconimage)
+	liz.setInfo( type="Video", infoLabels={ "Title": name} )
+	ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=True)
+	return ok
+
 def PirataQB_Text_Color_Engine(Texto):
     string = Texto
     masterstring = "[COLOR=blue][B][I]"
-    #firstpart, secondpart = string[:len(string)/2], string[len(string)/2:]
     for i in range(len(string)):
         if string[i].startswith("("):
             masterstring+= "[/I][/B][/COLOR][COLOR=red][B][I]" + string[i]
         else:masterstring+= string[i]
     masterstring+= "[/I][/B][/COLOR]"
-    #final = "[COLOR=red][B][I]"+firstpart+"[/I][/B][/COLOR][COLOR=blue][B][I]"+secondpart+"[/I][/B][/COLOR]"
     return masterstring
 
 def GetQBPage(URL,Page):
@@ -331,23 +431,21 @@ def GetQBPage(URL,Page):
     PageCounter = 1
     progress = xbmcgui.DialogProgress()
     progress.create('Aguarde', '')
-    #Counter = Page
     Actual = 0
     PagesLoaded = int(addon.getSetting("paginas"))
     for Counter in range(Page,Page+PagesLoaded):
         Page = Counter
         links = getFilmesqb(URL,Page)
         for i in range(len(links)):
-            getLinks(links[i])
-            if PagesLoaded > 1:
-                MSG_Paginas = "                                                 Página : [COLOR=blue]"+str(int(PageCounter))+"[/COLOR]/[COLOR=red]"+str(PagesLoaded)+"[/COLOR]"
-            else:MSG_Paginas=""
             Percentage = ((Actual*100)*PagesLoaded/(len(links)*PagesLoaded)/PagesLoaded)
-            progress.update(Percentage, MSG_Paginas,"                             Estamos a verificar a Página : [COLOR=blue]"+str(Page)+"[/COLOR]", "")
+            if PagesLoaded > 1:progress.update(Percentage,"                                                 Página : [COLOR=blue]"+str(int(PageCounter))+"[/COLOR]/[COLOR=red]"+str(PagesLoaded)+"[/COLOR]","                             Estamos a verificar a Página : [COLOR=blue]"+str(Page)+"[/COLOR]", "")
+            else:progress.update(Percentage, "                             Estamos a verificar a Página : [COLOR=blue]"+str(Page)+"[/COLOR]","", "")
             Actual += 1
         PageCounter += 1
-        if test_next_page(URL,Page) == False:
-            break
+        try:
+            if test_next_page(URL,Page) == False:
+                break
+        except:pass
     progress.close()
     if test_next_page(URL,Page): # Evitar saltar para o espaço.
         addLink("[COLOR=red][B][I]página[/I][/B][/COLOR] [COLOR=blue][B][I]seguinte[/I][/B][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&URL="+URL+"&movies_pos="+str(int(FixedPage+PagesLoaded)),icon_pagina_seguinte,"2015",True)
@@ -384,28 +482,10 @@ def PirataQB_Resolver(url):
                         resolved_url = resolving_OpenLoad(url)
             elif "http://videomega.tv/" in url:
                 import urlresolver
-                try:
-                    from resources.lib.resolvers import videomega
-                    resolved_url = videomega.resolve(url)
-                except:
-                    resolved_url = urlresolver.resolve(url)
+                from resources.lib.resolvers import videomega
+                try:resolved_url = urlresolver.resolve(url)
+                except:resolved_url = videomega.resolve(url)
     return resolved_url
-
-########################################################################################################################
-#def ask_Resolved_Openload(url):
-#    headers = {'User-agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0'}
-#    req = urllib2.Request("http://localhost:81/index.py?_Webtest_"+url,None,headers)
-#    response = urllib2.urlopen(req)
-#    data = ""
-#    while not len(data) > 1 :
-#        try:
-#                data = response.read()
-#        except:pass
-#    response.close()
-#    data = data.split(':')[1] + ":" +data.split(':')[2]
-#    data = data.split('<')[0]
-#    return data
-########################################################################################################################
 
 def resolving_OpenLoad(url):
     #UNDER GNU By Ricardo Boavida (Windows)
@@ -515,6 +595,8 @@ except:
 
 params=get_params()
 
+print("PARAMS : "+str(params))
+
 url=None
 name=None
 mode=None
@@ -529,8 +611,19 @@ SelectionURL=None
 
 Subs=""
 
+Episodio=""
+Links_Serie=""
+
 try:
     url=urllib.unquote_plus(params["#url"]).decode('utf-8')
+except:
+    pass
+try:
+    Episodio=urllib.unquote_plus(params["#episodio"]).decode('utf-8')
+except:
+    pass
+try:
+    Links_Serie=urllib.unquote_plus(params["#links_serie"]).decode('utf-8')
 except:
     pass
 try:
@@ -575,36 +668,47 @@ if not url is None:
         mode=None
 
 if mode==None: # Menu
-    addFolder("Filmes","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes/",icon_filmes)
-    addFolder("Filmes HD","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-hd/",icon_filmes_HD)
+    addFolder("Filmes","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/",icon_filmes)
+    #addFolder("Séries","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/series-online/",icon_filmes_HD)
     addFolder("Generos","plugin://plugin.video.pirataqb/&#mode=2",icon_generos)
+    addFolder("Pesquisa","plugin://plugin.video.pirataqb/&#mode=3",icon_generos)
 
 elif mode==1: # Pesquisar
     GetQBPage(SelectionURL,int(Movies_Pos))
     xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
+elif mode==3: # Pesquisa Avançada
+    dialog = xbmcgui.Dialog()
+    Movie = dialog.input('Pesquisa', type=xbmcgui.INPUT_ALPHANUM)
+    if len(Movie) >= 4:
+        Pesquisa_De_Filmes(Movie)
+    else:
+        dialog = xbmcgui.Dialog()
+        ok = dialog.ok('PirataQB '+addon_version,'A Pesquisa requer no minimo 4 Characteres.')
+    Movie=""
+
 elif mode==2: # Separador Generos
-    addFolder("[COLOR=red]Aç[COLOR=blue]ão[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/acao/",icon_MenuGeneros_acao)
-    addFolder("[COLOR=red]Aven[COLOR=blue]tura[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/aventura/",icon_MenuGeneros_aventura)
-    addFolder("[COLOR=red]Anima[COLOR=blue]ção[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/animacao/",icon_MenuGeneros_animacao)
-    addFolder("[COLOR=red]Animação [COLOR=blue](PT-PT)[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/animacao-em-portugues/",icon_MenuGeneros_animacaoPT)
-    addFolder("[COLOR=red]Biogra[COLOR=blue]fia[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/biografia/",icon_MenuGeneros_biografia)
-    addFolder("[COLOR=red]Comé[COLOR=blue]dia[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/comedia/",icon_MenuGeneros_comedia)
-    addFolder("[COLOR=red]Cri[COLOR=blue]me[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/crime/",icon_MenuGeneros_crime)
-    addFolder("[COLOR=red]Despor[COLOR=blue]to[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/desporto/",icon_MenuGeneros_desporto)
-    addFolder("[COLOR=red]Documen[COLOR=blue]tário[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/documentario/",icon_MenuGeneros_documentario)
-    addFolder("[COLOR=red]Dra[COLOR=blue]ma[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/drama/",icon_MenuGeneros_drama)
-    addFolder("[COLOR=red]Fami[COLOR=blue]liar[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/familiar/",icon_MenuGeneros_familiar)
-    addFolder("[COLOR=red]Fanta[COLOR=blue]sia[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/fantasia/",icon_MenuGeneros_fantasia)
-    addFolder("[COLOR=red]Gue[COLOR=blue]rra[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/guerra/",icon_MenuGeneros_guerra)
-    addFolder("[COLOR=red]Histó[COLOR=blue]ria[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/historia/",icon_MenuGeneros_historia)
-    addFolder("[COLOR=red]Misté[COLOR=blue]rio[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/misterio/",icon_MenuGeneros_misterio)
-    addFolder("[COLOR=red]Musi[COLOR=blue]cal[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/musical/",icon_MenuGeneros_musical)
-    addFolder("[COLOR=red]Portugês -[COLOR=blue] Brasileiro[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/portugues-brasileiro/",icon_MenuGeneros_PT_BR)
-    addFolder("[COLOR=red]Roman[COLOR=blue]ce[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/romance/",icon_MenuGeneros_romance)
-    addFolder("[COLOR=red]Terr[COLOR=blue]or[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/terror/",icon_MenuGeneros_terror)
-    addFolder("[COLOR=red]Thri[COLOR=blue]ller[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/thriller/",icon_MenuGeneros_thriller)
-    addFolder("[COLOR=red]West[COLOR=blue]ern[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/generos/western/",icon_MenuGeneros_western)
+    addFolder("[COLOR=red]Aç[COLOR=blue]ão[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/acao/",icon_MenuGeneros_acao)
+    addFolder("[COLOR=red]Aven[COLOR=blue]tura[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/aventura/",icon_MenuGeneros_aventura)
+    addFolder("[COLOR=red]Anima[COLOR=blue]ção[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/animacao/",icon_MenuGeneros_animacao)
+    addFolder("[COLOR=red]Animação [COLOR=blue](PT-PT)[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/animacao-em-portugues/",icon_MenuGeneros_animacaoPT)
+    addFolder("[COLOR=red]Biogra[COLOR=blue]fia[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/biografia/",icon_MenuGeneros_biografia)
+    addFolder("[COLOR=red]Comé[COLOR=blue]dia[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/comedia/",icon_MenuGeneros_comedia)
+    addFolder("[COLOR=red]Cri[COLOR=blue]me[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/crime/",icon_MenuGeneros_crime)
+    addFolder("[COLOR=red]Despor[COLOR=blue]to[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/desporto/",icon_MenuGeneros_desporto)
+    addFolder("[COLOR=red]Documen[COLOR=blue]tário[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/generos/documentario/",icon_MenuGeneros_documentario)
+    addFolder("[COLOR=red]Dra[COLOR=blue]ma[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/drama/",icon_MenuGeneros_drama)
+    addFolder("[COLOR=red]Fami[COLOR=blue]liar[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/familiar/",icon_MenuGeneros_familiar)
+    addFolder("[COLOR=red]Fanta[COLOR=blue]sia[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/fantasia/",icon_MenuGeneros_fantasia)
+    addFolder("[COLOR=red]Gue[COLOR=blue]rra[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/guerra/",icon_MenuGeneros_guerra)
+    addFolder("[COLOR=red]Histó[COLOR=blue]ria[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/historia/",icon_MenuGeneros_historia)
+    addFolder("[COLOR=red]Misté[COLOR=blue]rio[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/misterio/",icon_MenuGeneros_misterio)
+    addFolder("[COLOR=red]Musi[COLOR=blue]cal[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/musical/",icon_MenuGeneros_musical)
+    addFolder("[COLOR=red]Portugês -[COLOR=blue] Brasileiro[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/portugues-brasileiro/",icon_MenuGeneros_PT_BR)
+    addFolder("[COLOR=red]Roman[COLOR=blue]ce[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/romance/",icon_MenuGeneros_romance)
+    addFolder("[COLOR=red]Terr[COLOR=blue]or[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/terror/",icon_MenuGeneros_terror)
+    addFolder("[COLOR=red]Thri[COLOR=blue]ller[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/thriller/",icon_MenuGeneros_thriller)
+    addFolder("[COLOR=red]West[COLOR=blue]ern[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/western/",icon_MenuGeneros_western)
 
 elif mode==19: # Reproduzir
     Progresso_File.create('Aguarde', 'A Processar o Link.')
@@ -616,6 +720,7 @@ elif mode==19: # Reproduzir
     xbmc.sleep(Sleep_Time)
     xbmc.Player().play(str(resolved),listitem)
     Progresso_File.close()
+    subs=""
     if addon.getSetting("subtitles") == "true":
         if len(name.split('%')) > 0:
             try:
@@ -631,3 +736,98 @@ elif mode==19: # Reproduzir
 
 Set_Vista(addon.getSetting('Tp Vista'))
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+########################################################################################################################
+#if Serie_Or_Not == True:
+ #               Preterit_Info = BruteInfo.split('\r\n')
+  #              for i in range(len(Preterit_Info)):
+   #                 if "<template class=" in Preterit_Info[i]:
+    #                    Links_By_Episode = Preterit_Info[i].split('Episódio')
+     #                   for i in range(len(Links_By_Episode)):
+      #                      Lista_De_Links_Do_Episodio = []
+       #                     Numero_Episodio = Links_By_Episode[i].split('<')[0]
+        #                    Numero_Episodio = Numero_Episodio.replace(' ','')
+         #                   Numero_Episodio = Numero_Episodio.replace('\r\n','')
+          #                  for u in range(len(Lista_de_Links)):
+           #                     if u == 0:linkattached+= "&#url="+Lista_de_Links[u]+"["+Numero_Episodio+"]"
+            #                    else:linkattached+= "#"+Lista_de_Links[u]+"["+Numero_Episodio+"]"
+#
+########################################################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+######################################################## Dinossaurs #########################################################
+########################################################################################################################
+#def ask_Resolved_Openload(url):
+#    headers = {'User-agent' : 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0'}
+#    req = urllib2.Request("http://localhost:81/index.py?_Webtest_"+url,None,headers)
+#    response = urllib2.urlopen(req)
+#    data = ""
+#    while not len(data) > 1 :
+#        try:
+#                data = response.read()
+#        except:pass
+#    response.close()
+#    data = data.split(':')[1] + ":" +data.split(':')[2]
+#    data = data.split('<')[0]
+#    return data
+########################################################################################################################
