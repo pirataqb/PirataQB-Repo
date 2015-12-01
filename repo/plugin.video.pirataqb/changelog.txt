@@ -1,4 +1,4 @@
-﻿********* Version 1.0.0 *********
+﻿********* [COLOR=red]Version[/COLOR] [COLOR=blue]0.1.5[/COLOR] *********
 # Análise de Resolver's avançada              
 # Procura de Legenda automática             
 # Resolver de Openload próprio              

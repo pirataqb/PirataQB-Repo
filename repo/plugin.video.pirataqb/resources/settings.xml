@@ -4,6 +4,7 @@
 	<setting id="ntb" type="select" label="Browser do Openload (Windows)" values="Mozilla Firefox|Google Chrome" default="Mozilla Firefox" />
 	<setting id="paginas" type="slider" label="Quantidade De Páginas a Carregar" default="2" range="1,5" option="int" />
 	<setting id="sleep" type="slider" label="Sleep (Segundos)" default="2" range="1,5" option="int" />
+	<setting id="welcome" type="bool" label="" visible="false" default="false" />
   </category>
   <category label="Legendas">
 	<setting id="subtitles" type="bool" label="Legendas Activas" default="true"/>
