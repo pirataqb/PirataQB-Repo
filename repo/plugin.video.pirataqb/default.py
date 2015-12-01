@@ -93,7 +93,7 @@ if OS == "Windows":
             file.close()
 
 if os.path.isfile(profile+'/WELCOME') == False:
-    file = open(profile+'/README.txt', "r")
+    file = open(home+'/README.txt', "r")
     content = file.read()
     dialog = xbmcgui.Dialog()
     ok = dialog.ok('PirataQB '+addon_version,content.decode('utf-8'))
