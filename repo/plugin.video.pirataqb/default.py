@@ -83,35 +83,62 @@ if "nt" in OS:
     OS = "Windows"
 
 
+if os.path.isdir(profile+'/DUMP') == False:
+    os.mkdir(profile+'/DUMP')
+
 if OS == "Windows":
     if len(xbmcplugin.getSetting(int(sys.argv[1]),'ntb')) > 1:
-        if os.path.isfile(profile+'/DUMP') == False and "Google Chrome" in Openload_Browser:
+        if os.path.isfile(profile+'/DUMP/DUMP') == False and "Google Chrome" in Openload_Browser:
             dialog = xbmcgui.Dialog()
             ok = dialog.ok('PirataQB '+addon_version, 'Caso não tenha instalado o Browser Predefenido, aconcelhamos que o instale para o bom funcionamento do Script.')
-            file = open(profile+'/DUMP', "w")
+            file = open(profile+'/DUMP/DUMP', "w")
             file.write("0")
             file.close()
 
-if os.path.isfile(profile+'/WELCOME') == False:
+if os.path.isfile(profile+'/DUMP/WELCOME') == False:
     file = open(home+'/README.txt', "r")
     content = file.read()
     dialog = xbmcgui.Dialog()
     ok = dialog.ok('PirataQB '+addon_version,content.decode('utf-8'))
-    file = open(profile+'/WELCOME',"w")
+    file = open(profile+'/DUMP/WELCOME',"w")
     file.write("0")
     file.close()
 
-if os.path.isfile(profile+'/DUMPMSG_V'+addon_version) == False:
+if os.path.isfile(profile+'/DUMP/DUMPMSG_V'+addon_version) == False:
     file = open(home+'/changelog.txt', "r")
     content = file.read()
     dialog = xbmcgui.Dialog()
     ok = dialog.ok('PirataQB '+addon_version,content.decode('utf-8'))
-    file = open(profile+'/DUMPMSG_V'+addon_version, "w")
+    file = open(profile+'/DUMP/DUMPMSG_V'+addon_version, "w")
     file.write("0")
     file.close()
 
+
+
+
+
+
+
+
+
 def addon_log(string):
     xbmc.log("[addon.pirataqb-%s]: %s" %(addon_version, string))
+
+
+def Save_Search(Search):
+    file = open(profile+'/DUMP/SAVE_SEARCH',"w")
+    file.write(Search)
+    file.close()
+
+def Load_Search():
+    if os.path.isfile(profile+'/DUMP/SAVE_SEARCH') == True:
+        file = open(profile+'/DUMP/SAVE_SEARCH', "r")
+        content = file.read()
+        if len(content) > 0:return content
+        else:return ""
+    else:return ""
+
+
 
 def Download_File(URL,Name,Profile_Dir=True):
     import urllib2
@@ -294,12 +321,11 @@ def Info_By_Link(urlfilme):
 
 
 # Pesquisa
-def Pesquisa_De_Filmes(Filme):
-    Url_Pesquisa = 'http://www.pirataqb.com/index.php?story={'+Filme+'}&catlist[]=2&catlist[]=14&do=search&subaction=search'
+def Pesquisa_De_Filmes(Filme,Pagina):
+    Url_Pesquisa ='http://www.pirataqb.com/index.php?story={'+Filme+'}&catlist[]=2&catlist[]=14&search_start='+str(Pagina)+'&do=search&subaction=search'
     # Fazer Lista de Filmes com este Link
     Pedido = makeRequest(Url_Pesquisa)
-    Info =  Pedido.split('<h1>')#re.compile('<a href="(.+?)">(.+?)</a>').findall(Pedido)
-    Percentage = 0
+    Info =  Pedido.split('<h1>')
     progress = xbmcgui.DialogProgress()
     progress.create('A Carregar', '')
     for i in range(len(Info)):
@@ -307,9 +333,21 @@ def Pesquisa_De_Filmes(Filme):
             End = Info[i].split('</h1>')[0]
             if ".html" in End:
                 if '"' in End:
+                    Titulo = End
+                    Titulo = Titulo.split('>')[1]
+                    Titulo = Titulo.split('<')[0]
                     End = End.split('"')[1]
                     End = End.split('"')[0]
+                    progress.update(0,"A [COLOR=blue]inserir[/COLOR] o [COLOR=red]item[/COLOR] : "+Titulo)
                     Info_By_Link(End)
+    Paginas = Pedido.split('<div class="maincont" align="center">')
+    for u in range(len(Paginas)):
+        if "</div>" in Paginas[u]:
+            Info = Paginas[u].split('</div>')[0]
+            Real_Paginas = re.compile('href="#">(.+?)</a>').findall(Info)
+            for i in range(len(Real_Paginas)):
+                if Real_Paginas[i].startswith(str(int(Pagina)+1)):
+                    addFolder("Próxima Página","plugin://plugin.video.pirataqb/&#mode=3"+"&#name="+Filme+"&#pagina="+str(int(Pagina)+1),icon_pagina_seguinte)
 
 
 
@@ -584,6 +622,12 @@ def Set_Vista(Nome):
     elif Nome == "Lista":
         xbmc.executebuiltin("Container.SetViewMode(1)")
 
+def Menu_Inicial():
+    addFolder("Filmes","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/",icon_filmes)
+    #addFolder("Séries","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/series-online/",icon_filmes_HD)
+    addFolder("Generos","plugin://plugin.video.pirataqb/&#mode=2",icon_generos)
+    addFolder("Pesquisa","plugin://plugin.video.pirataqb/&#mode=3",icon_generos)
+
 try:
     xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_UNSORTED)
 except:
@@ -620,8 +664,7 @@ SelectionURL=None
 
 Subs=""
 
-Episodio=""
-Links_Serie=""
+pagina=""
 
 try:
     url=urllib.unquote_plus(params["#url"]).decode('utf-8')
@@ -640,11 +683,19 @@ try:
 except:
     pass
 try:
+    pagina=urllib.unquote_plus(params["%23pagina"]).decode('utf-8')
+except:
+    pass
+try:
     Movies_Pos=urllib.unquote_plus(params["movies_pos"]).decode('utf-8')
 except:
     pass
 try:
-    name=urllib.unquote_plus(params["#name"])
+    name=urllib.unquote_plus(params["#name"]).decode('utf-8')
+except:
+    pass
+try:
+    name=urllib.unquote_plus(params["#%23name"]).decode('utf-8')
 except:
     pass
 try:
@@ -668,6 +719,8 @@ try:
 except:
     pass
 
+print("My Mode : "+str(mode))
+
 if Movies_Pos is None or Movies_Pos <= 1:
     Movies_Pos=1
 
@@ -677,24 +730,34 @@ if not url is None:
         mode=None
 
 if mode==None: # Menu
-    addFolder("Filmes","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/",icon_filmes)
-    #addFolder("Séries","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/series-online/",icon_filmes_HD)
-    addFolder("Generos","plugin://plugin.video.pirataqb/&#mode=2",icon_generos)
-    addFolder("Pesquisa","plugin://plugin.video.pirataqb/&#mode=3",icon_generos)
+    Menu_Inicial()
 
 elif mode==1: # Pesquisar
     GetQBPage(SelectionURL,int(Movies_Pos))
-    xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 elif mode==3: # Pesquisa Avançada
-    dialog = xbmcgui.Dialog()
-    Movie = dialog.input('Pesquisa', type=xbmcgui.INPUT_ALPHANUM)
-    if len(Movie) >= 4:
-        Pesquisa_De_Filmes(Movie)
-    else:
-        dialog = xbmcgui.Dialog()
-        ok = dialog.ok('PirataQB '+addon_version,'A Pesquisa requer no minimo 4 Characteres.')
     Movie=""
+    if name == "" or name == None:
+        dialog = xbmcgui.Dialog()
+        Movie = dialog.input('Pesquisa',Load_Search(), type=xbmcgui.INPUT_ALPHANUM)
+        if len(Movie) >= 4:
+            Save_Search(Movie)
+            Pesquisa_De_Filmes(Movie,1)
+        elif len(Movie) <= 4 and len(Movie) <> 0:
+            dialog = xbmcgui.Dialog()
+            ok = dialog.ok('Pesquisa','A pesquisa requer pelo menos 4 caracteres.','')
+            while len(Movie) < 4 or Movie <> -1:
+                dialog = xbmcgui.Dialog()
+                Movie = dialog.input('Pesquisa',Load_Search(), type=xbmcgui.INPUT_ALPHANUM)
+                if Movie == -1:
+                    mode=None
+                    break
+            Save_Search(Movie)
+            Pesquisa_De_Filmes(Movie,1)
+    elif len(pagina) > 0:
+            Pesquisa_De_Filmes(name,pagina)
+    if len(Movie) <= 0 and len(pagina) <= 0:
+        Menu_Inicial()
 
 elif mode==2: # Separador Generos
     addFolder("[COLOR=red]Aç[COLOR=blue]ão[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/acao/",icon_MenuGeneros_acao)
