@@ -378,14 +378,16 @@ def getSeriesqb(url,pagina):
     Titulo_Real=""
     IMDB=""
     http = makeRequest(url)
-    Splited_to_Get_Link = http.split('<div class="cover-item">')
+    Splited_to_Get_Link = http.split('<template class="cover-preview-content">')
     for i in range(len(Splited_to_Get_Link)):
+        print(Splited_to_Get_Link[i])
         Counter = 0
         BruteInfo = Splited_to_Get_Link[i]
         Preterit_Info = BruteInfo.split('\r\n')
         for i in range(len(Preterit_Info)):
-            if "<template class=" in Preterit_Info[i]:
-                Titulo = re.compile('<div class="cover-title" style="display:none">(.+?)</div>').findall(Preterit_Info[i])
+            if '<div style="' in Preterit_Info[i]:
+                #print(Preterit_Info[i])
+                Titulo = re.compile('title="(.+?)"').findall(Preterit_Info[i])
                 Nome = re.compile('<!--/colorstart-->(.+?)<!--colorend-->').findall(Preterit_Info[i])
                 IMDB_R = re.compile('<br /><b>(.+?)</b> / 10<br />').findall(Preterit_Info[i])
                 _Ano = re.compile('<b>Ano:</b>(.+?)<br />').findall(Preterit_Info[i])
@@ -417,7 +419,11 @@ def getSeriesqb(url,pagina):
                 for z in  range(len(Nome)):
                     Nome_Real = Nome[z]
                     break
-                Titulo_Real = str(Titulo[0])
+                for t in range(len(Titulo)):
+                    Titulo_Real = Titulo[t]
+                    print("Your Mega Title : "+Titulo[t])
+                #try:Titulo_Real = str(Titulo[0])
+                #except:Titulo_Real = "Name_Problems"
                 Titulo_Real = Titulo_Real.replace('amp;','')
                 Titulo_Real = Titulo_Real.replace('&','-')
                 Imagem = re.compile('<img src="(.+?)"').findall(Preterit_Info[i])
@@ -480,8 +486,9 @@ def getFilmesqb(url,pagina):
         Titulo_Real=""
         IMDB=""
         http = makeRequest(url)
-        Splited_to_Get_Link = http.split('<div class="cover-item">')
+        Splited_to_Get_Link = http.split('<template class="cover-preview-content">')
         for i in range(len(Splited_to_Get_Link)):
+            print(Splited_to_Get_Link[i])
             Lista_de_Links = []
             BruteInfo = Splited_to_Get_Link[i]
             _Links = re.compile('<a href="(.+?)"').findall(BruteInfo)
