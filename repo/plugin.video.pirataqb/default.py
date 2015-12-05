@@ -213,6 +213,41 @@ def msgbox(texto,tempo):
     xbmc.executebuiltin("XBMC.Notification(PirataQB,"+str(texto)+","+str(tempo)+","+icon+")")
 
 
+
+def Pesquisa_De_Filmes(Filme,Pagina):
+    #if Series == False:
+    Url_Pesquisa ='http://www.pirataqb.com/index.php?story={'+Filme+'}&catlist[]=2&catlist[]=14&search_start='+str(Pagina)+'&do=search&subaction=search'
+ #Séries   #else:Url_Pesquisa ='http://www.pirataqb.com/index.php?story={'+Filme+'}&catlist[]=26&catlist[]=30&search_start='+str(Pagina)+'&do=search&subaction=search'
+
+    # Fazer Lista de Filmes com este Link
+    Pedido = makeRequest(Url_Pesquisa,None,3000)
+    Info =  Pedido.split('<h1>')
+    Testing = re.compile('<div class="searsh_mess">(.+?)</div>').findall(Pedido)
+    print(str(Testing))
+    progress = xbmcgui.DialogProgress()
+    progress.create('A Carregar', '')
+    for i in range(len(Info)):
+        if '<a href="' in Info[i]:
+            End = Info[i].split('</h1>')[0]
+            if ".html" in End:
+                if '"' in End:
+                    Titulo = End
+                    Titulo = Titulo.split('>')[1]
+                    Titulo = Titulo.split('<')[0]
+                    End = End.split('"')[1]
+                    End = End.split('"')[0]
+                    progress.update(0,"A inserir : "+PirataQB_Text_Color_Engine(Titulo))
+                    Info_By_Link(End)
+    Paginas = Pedido.split('<div class="maincont" align="center">')
+    for u in range(len(Paginas)):
+        if "</div>" in Paginas[u]:
+            Info = Paginas[u].split('</div>')[0]
+            Real_Paginas = re.compile('href="#">(.+?)</a>').findall(Info)
+            for i in range(len(Real_Paginas)):
+                if Real_Paginas[i].startswith(str(int(Pagina)+1)):
+                    addFolder("Próxima Página","plugin://plugin.video.pirataqb/&#mode=3"+"&#name="+Filme+"&#pagina="+str(int(Pagina)+1),icon_pagina_seguinte)
+
+
 def Info_By_Link(urlfilme):
     File_Name = "" # For SUBS
     listlinks = []
@@ -325,39 +360,6 @@ def Info_By_Link(urlfilme):
 
 ########################################################################################################################
 
-
-# Pesquisa
-def Pesquisa_De_Filmes(Filme,Pagina,Series=False):
-    if Series == False: Url_Pesquisa ='http://www.pirataqb.com/index.php?story={'+Filme+'}&catlist[]=2&catlist[]=14&search_start='+str(Pagina)+'&do=search&subaction=search'
-    else:Url_Pesquisa ='http://www.pirataqb.com/index.php?story={'+Filme+'}&catlist[]=26&catlist[]=30&search_start='+str(Pagina)+'&do=search&subaction=search'
-    # Fazer Lista de Filmes com este Link
-    Pedido = makeRequest(Url_Pesquisa,None,3000)
-    Info =  Pedido.split('<h1>')
-    Testing = re.compile('<div class="searsh_mess">(.+?)</div>').findall(Pedido)
-    print(str(Testing))
-    progress = xbmcgui.DialogProgress()
-    progress.create('A Carregar', '')
-    for i in range(len(Info)):
-        if '<a href="' in Info[i]:
-            End = Info[i].split('</h1>')[0]
-            if ".html" in End:
-                if '"' in End:
-                    Titulo = End
-                    Titulo = Titulo.split('>')[1]
-                    Titulo = Titulo.split('<')[0]
-                    End = End.split('"')[1]
-                    End = End.split('"')[0]
-                    progress.update(0,"A inserir : "+PirataQB_Text_Color_Engine(Titulo))
-                    Info_By_Link(End)
-    Paginas = Pedido.split('<div class="maincont" align="center">')
-    for u in range(len(Paginas)):
-        if "</div>" in Paginas[u]:
-            Info = Paginas[u].split('</div>')[0]
-            Real_Paginas = re.compile('href="#">(.+?)</a>').findall(Info)
-            for i in range(len(Real_Paginas)):
-                if Real_Paginas[i].startswith(str(int(Pagina)+1)):
-                    addFolder("Próxima Página","plugin://plugin.video.pirataqb/&#mode=3"+"&#name="+Filme+"&#pagina="+str(int(Pagina)+1),icon_pagina_seguinte)
-
 def getSeriesqb(url,pagina):
     if pagina !=0:
             url +='page/'+str(pagina)+'/'
@@ -383,10 +385,35 @@ def getSeriesqb(url,pagina):
         Preterit_Info = BruteInfo.split('\r\n')
         for i in range(len(Preterit_Info)):
             if "<template class=" in Preterit_Info[i]:
-                print("SEARCH ME HERE : "+Preterit_Info[i])
                 Titulo = re.compile('<div class="cover-title" style="display:none">(.+?)</div>').findall(Preterit_Info[i])
                 Nome = re.compile('<!--/colorstart-->(.+?)<!--colorend-->').findall(Preterit_Info[i])
-                IMDB = re.compile('<br /><b>(.+?)</b> / 10<br />').findall(Preterit_Info[i])[0]
+                IMDB_R = re.compile('<br /><b>(.+?)</b> / 10<br />').findall(Preterit_Info[i])
+                _Ano = re.compile('<b>Ano:</b>(.+?)<br />').findall(Preterit_Info[i])
+                _Duracao_e_Tamanho = re.compile('<br /><b>Tamanho Total:</b>(.+?)<br /><b>Duração:</b>(.+?)<br />').findall(Preterit_Info[i])
+                _Qalidade = re.compile('<br /><b>Qualidade:</b>(.+?)<br />').findall(Preterit_Info[i])
+                _Genero = re.compile('<br /><b>Género:</b>(.+?)<br />').findall(Preterit_Info[i])
+                _Elenco_Realizacao = re.compile('<b>Realizador:</b>(.+?)<br /><b>Elenco:</b>(.+?)<br /><br />').findall(Preterit_Info[i])
+                _Sipnose = re.compile('<img src="/images/sinopse.png" alt="(.+?)" title="(.+?)"  /><!--dle_image_end--><br /><br />(.+?)<br /><br />').findall(Preterit_Info[i])
+                for i in range(len(_Sipnose)):
+                    for u in range(len(_Sipnose[i])):
+                        if u == 2: Sipnose = _Sipnose[i][u]
+                for i in range(len(_Elenco_Realizacao)):
+                    for u in range(len(_Elenco_Realizacao[i])):
+                        if u == 0:Realizador= _Elenco_Realizacao[i][u]
+                        else:Elenco= _Elenco_Realizacao[i][u]
+                for i in range(len(_Genero)):
+                    Genero = _Genero[i]
+                for i in range(len(_Qalidade)):
+                    Qualidade = _Qalidade[i]
+                for i in range(len(_Duracao_e_Tamanho)):
+                    for u in range(len(_Duracao_e_Tamanho[i])):
+                        if u ==0:Tamanho = _Duracao_e_Tamanho[i][u]
+                        else:Duracao = _Duracao_e_Tamanho[i][u]
+                for i in range(len(_Ano)):
+                    Year = _Ano[i]
+                for a in range(len(IMDB_R)):
+                    IMDB = IMDB_R[a]
+                    break
                 for z in  range(len(Nome)):
                     Nome_Real = Nome[z]
                     break
@@ -434,7 +461,7 @@ def getSeriesqb(url,pagina):
                             linkattached+= "%" + Real_Real_Nome
                     except:pass
                 if "url=" and "episodios=" in linkattached:
-                    addFolder(Titulo_Real.split('%')[0],linkattached,Image)
+                    addFolder(Titulo_Real.split('%')[0],linkattached,Image,"",True,Genero,Realizador,Elenco,Sipnose,Qualidade,Tamanho,Duracao,Youtube_Trailer,IMDB)
 
 def getFilmesqb(url,pagina):
         if pagina !=0:
@@ -538,11 +565,11 @@ def addLink(name,url,iconimage,ano="",folder=False,Genero="",Realizador="",Elenc
 	ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=folder)
 	return ok
 
-def addFolder(name,url,iconimage):
+def addFolder(name,url,iconimage,ano="",folder=False,Genero="",Realizador="",Elenco="",Sipnose="",Qualidade="",Tamanho="",Duracao="",Trailer="",IMDB=""):
 	ok=True
 	liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
 	liz.setProperty('fanart_image', iconimage)
-	liz.setInfo( type="Video", infoLabels={ "Title": name} )
+	liz.setInfo( type="Video", infoLabels={ "Title": name ,'Trailer': "plugin://plugin.video.youtube/play/?video_id="+Trailer, "Year": ano,"Rating":IMDB , "Genre": Genero, "Director": Realizador, "Plot": "[COLOR=red]Sinop[COLOR=blue]se[/COLOR][/COLOR] : "+Sipnose+"\r\n"+"[COLOR=red]Elen[COLOR=blue]co[/COLOR][/COLOR] : "+Elenco+"\r\n"+"[COLOR=red]Quali[COLOR=blue]dade[/COLOR][/COLOR] : "+Qualidade+"\r\n"+"[COLOR=red]Tamanho [COLOR=blue]Total[/COLOR][/COLOR] : "+Tamanho+"\r\n"+"[COLOR=red]Dura[COLOR=blue]ção[/COLOR][/COLOR] : "+Duracao} )
 	ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz,isFolder=True)
 	return ok
 
@@ -708,10 +735,19 @@ def Set_Vista(Nome):
         xbmc.executebuiltin("Container.SetViewMode(1)")
 
 def Menu_Inicial():
+    addFolder("Menu Filmes","plugin://plugin.video.pirataqb/&#mode=5",icon_filmes)
+    addFolder("Menu Séries","plugin://plugin.video.pirataqb/&#mode=6",icon_filmes_HD)
+
+def Menu_Filmes():
     addFolder("Filmes","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/",icon_filmes)
-    addFolder("Séries_Trial","plugin://plugin.video.pirataqb/&#mode=4&movies_pos=1&URL=http://www.pirataqb.com/series-online/",icon_filmes_HD)
+    #addFolder("Séries_Trial","plugin://plugin.video.pirataqb/&#mode=4&movies_pos=1&URL=http://www.pirataqb.com/series-online/",icon_filmes_HD)
     addFolder("Generos","plugin://plugin.video.pirataqb/&#mode=2",icon_generos)
     addFolder("Pesquisa","plugin://plugin.video.pirataqb/&#mode=3",icon_generos)
+
+def Menu_Series():
+    #addFolder("Filmes","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/",icon_filmes)
+    addFolder("Séries","plugin://plugin.video.pirataqb/&#mode=4&movies_pos=1&URL=http://www.pirataqb.com/series-online/",icon_filmes_HD)
+    #addFolder("Pesquisa de Séries","plugin://plugin.video.pirataqb/&#mode=30",icon_generos)
 
 try:
     xbmcplugin.addSortMethod(int(sys.argv[1]), xbmcplugin.SORT_METHOD_UNSORTED)
@@ -829,7 +865,7 @@ if mode==None: # Menu
 elif mode==1: # Pesquisar
     GetQBPage(SelectionURL,int(Movies_Pos))
 
-elif mode==2: # Separador Generos
+elif mode==2: # Separador Filmes por Generos
     addFolder("[COLOR=red]Aç[COLOR=blue]ão[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/acao/",icon_MenuGeneros_acao)
     addFolder("[COLOR=red]Aven[COLOR=blue]tura[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/aventura/",icon_MenuGeneros_aventura)
     addFolder("[COLOR=red]Anima[COLOR=blue]ção[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/animacao/",icon_MenuGeneros_animacao)
@@ -852,7 +888,7 @@ elif mode==2: # Separador Generos
     addFolder("[COLOR=red]Thri[COLOR=blue]ller[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/thriller/",icon_MenuGeneros_thriller)
     addFolder("[COLOR=red]West[COLOR=blue]ern[/COLOR][/COLOR]","plugin://plugin.video.pirataqb/&#mode=1&movies_pos=1&URL=http://www.pirataqb.com/filmes-online/western/",icon_MenuGeneros_western)
 
-elif mode==3: # Pesquisa Avançada
+elif mode==3: # Pesquisa Avançada Filmes
     DoIt_OrNot = False
     #dialog = xbmcgui.Dialog()
     #fastnames = ['Filmes','Séries']
@@ -866,7 +902,7 @@ elif mode==3: # Pesquisa Avançada
         Movie = dialog.input('Pesquisa',Load_Search(), type=xbmcgui.INPUT_ALPHANUM)
         if len(Movie) >= 4:
             Save_Search(Movie)
-            Pesquisa_De_Filmes(Movie,1,DoIt_OrNot)
+            Pesquisa_De_Filmes(Movie,1)
         elif len(Movie) <= 4 and len(Movie) <> 0:
             dialog = xbmcgui.Dialog()
             ok = dialog.ok('Pesquisa','A pesquisa requer pelo menos 4 caracteres.','')
@@ -877,17 +913,22 @@ elif mode==3: # Pesquisa Avançada
                     mode=None
                     break
             Save_Search(Movie)
-            Pesquisa_De_Filmes(Movie,1,DoIt_OrNot)
+            Pesquisa_De_Filmes(Movie,1)
     elif len(pagina) > 0:
-            Pesquisa_De_Filmes(name,pagina,DoIt_OrNot)
+            Pesquisa_De_Filmes(name,pagina)
     if len(Movie) <= 0 and len(pagina) <= 0:
         Menu_Inicial()
 
 elif mode == 4:
     getSeriesqb(SelectionURL,int(Movies_Pos))
 
+elif mode == 5:
+    Menu_Filmes()
+
+elif mode == 6:
+    Menu_Series()
+
 elif mode==19: # Reproduzir
-    print("I'm gona print : "+str(name))
     Progresso_File.create('Aguarde', 'A Processar o Link.')
     xbmc.sleep(1000)
     resolved = PirataQB_Resolver(url)
