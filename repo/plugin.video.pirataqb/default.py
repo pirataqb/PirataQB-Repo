@@ -139,13 +139,12 @@ def Load_Search():
     else:return ""
 
 
-
-def Download_File(URL,Name,Profile_Dir=True):
+def Download_File(URL,Name):
     import urllib2
     url = URL
     file_name = Name
     u = urllib2.urlopen(url)
-    f = open(profile+'\\'+ file_name, 'wb')
+    f = open(profile+'/'+ file_name, 'wb')
     meta = u.info()
     file_size = int(meta.getheaders("Content-Length")[0])
 
@@ -158,14 +157,13 @@ def Download_File(URL,Name,Profile_Dir=True):
         file_size_dl += len(buffer)
         f.write(buffer)
         status = (file_size_dl * 100 / file_size)
-        Progresso_File.update(int(status), "", "A descarregar "+Name+" ...", "")
     f.close()
 
-def Extract_Zip(File_Name,Delete_Original=True,Profile_Dir=True):
+def Extract_Zip(File_Name,Delete_Original=True):
     import zipfile
-    path = profile+'\\'+ File_Name
+    path = profile+'/'+ File_Name
     with zipfile.ZipFile(path, "r") as z:
-        z.extractall(profile+"\\")
+        z.extractall(profile+"/")
     if Delete_Original == True:
         os.remove(path)
 
@@ -376,6 +374,7 @@ def getSeriesqb(url,pagina):
     Duracao=""
     Youtube_Trailer=""
     Titulo_Real=""
+    Legendas_Fixas=""
     IMDB=""
     http = makeRequest(url)
     Splited_to_Get_Link = http.split('<template class="cover-preview-content">')
@@ -386,7 +385,7 @@ def getSeriesqb(url,pagina):
         Preterit_Info = BruteInfo.split('\r\n')
         for i in range(len(Preterit_Info)):
             if '<div style="' in Preterit_Info[i]:
-                #print(Preterit_Info[i])
+                print(Preterit_Info[i])
                 Titulo = re.compile('title="(.+?)"').findall(Preterit_Info[i])
                 Nome = re.compile('<!--/colorstart-->(.+?)<!--colorend-->').findall(Preterit_Info[i])
                 IMDB_R = re.compile('<br /><b>(.+?)</b> / 10<br />').findall(Preterit_Info[i])
@@ -396,6 +395,12 @@ def getSeriesqb(url,pagina):
                 _Genero = re.compile('<br /><b>Género:</b>(.+?)<br />').findall(Preterit_Info[i])
                 _Elenco_Realizacao = re.compile('<b>Realizador:</b>(.+?)<br /><b>Elenco:</b>(.+?)<br /><br />').findall(Preterit_Info[i])
                 _Sipnose = re.compile('<img src="/images/sinopse.png" alt="(.+?)" title="(.+?)"  /><!--dle_image_end--><br /><br />(.+?)<br /><br />').findall(Preterit_Info[i])
+                _LegendaFixa = re.compile('<!--dle_image_begin:http://www.pirataqb.com/images/legendaspt.png|--><img src="/images/legendaspt.png" alt="(.+?)" title="(.+?)"  /><!--dle_image_end--><br /><br /><a href="(.+?)" target="_blank">(.+?)</a><br />ou<br /><a href="(.+?)" target="_blank">(.+?)</a></div></div><!--hide_section_end-->').findall(Preterit_Info[i])
+                for l in range(len(_LegendaFixa)):
+                    for m in range(len(_LegendaFixa[l])):
+                        result = _LegendaFixa[l][m]
+                        if "http://uptobox.com/" in result:
+                            Legendas_Fixas = result
                 for i in range(len(_Sipnose)):
                     for u in range(len(_Sipnose[i])):
                         if u == 2: Sipnose = _Sipnose[i][u]
@@ -421,7 +426,6 @@ def getSeriesqb(url,pagina):
                     break
                 for t in range(len(Titulo)):
                     Titulo_Real = Titulo[t]
-                    print("Your Mega Title : "+Titulo[t])
                 #try:Titulo_Real = str(Titulo[0])
                 #except:Titulo_Real = "Name_Problems"
                 Titulo_Real = Titulo_Real.replace('amp;','')
@@ -443,14 +447,14 @@ def getSeriesqb(url,pagina):
                                 for v in range(len(Temporada)-1):
                                     if "S" in Temporada[v]:
                                         Temporada[v] = Temporada[v] + "E0" + Numero_Episodio
-                                    Real_Real_Nome +=Temporada[v] + " "
+                                    Real_Real_Nome +=Temporada[v] + "."
                             else:
                                 Temporada = Nome_Real.split('.')
                                 Real_Real_Nome = ""
                                 for v in range(len(Temporada)-1):
                                     if "S" in Temporada[v]:
                                         Temporada[v] = Temporada[v] + "E" + Numero_Episodio
-                                    Real_Real_Nome +=Temporada[v] + " "
+                                    Real_Real_Nome +=Temporada[v] + "."
                   ######################## EP XX #################################################################
                             if Counter == 0:linkattached += "&#episodios="+"*"+str(Numero_Episodio)
                             else:linkattached += "*" + str(Numero_Episodio)
@@ -464,7 +468,8 @@ def getSeriesqb(url,pagina):
                             for u in range(len(Lista_de_Links)):
                                 if u == 0:linkattached+= "$#url="+Lista_de_Links[u]
                                 else:linkattached+= "#"+Lista_de_Links[u]
-                            linkattached+= "%" + Real_Real_Nome
+                            if len(Legendas_Fixas) > 0:linkattached+= "%" + Real_Real_Nome +'@'+ Legendas_Fixas
+                            else:linkattached+= "%" + Real_Real_Nome
                     except:pass
                 if "url=" and "episodios=" in linkattached:
                     addFolder(Titulo_Real.split('%')[0],linkattached,Image,"",True,Genero,Realizador,Elenco,Sipnose,Qualidade,Tamanho,Duracao,Youtube_Trailer,IMDB)
@@ -652,6 +657,32 @@ def PirataQB_Resolver(url):
                 try:resolved_url = urlresolver.resolve(url)
                 except:resolved_url = videomega.resolve(url)
     return resolved_url
+
+def Series_TempEpisode_ToSIGNAL(Temporada,Episodio):
+    profile
+
+def Series_Subtitles_Engine(Url,Serie,Wanted):
+    try:
+        from resources.lib.resolvers import uptobox
+        Url = uptobox.resolve(Url)
+        Download_File(Url,Serie)
+        Extract_Zip(Serie,False)
+        if os.path.isdir(profile+'/'+'Legendas PT-PT'):
+           files = os.listdir(profile+'/'+'Legendas PT-PT')
+           for i in range(len(files)):
+                Patt = Wanted.split('.')
+                for v in range(len(Patt)-1):
+                    if "S" in Patt[v]:
+                        Wanted = Patt[v]
+                if Wanted in files[i]:
+                 return files[i]
+                 msgbox(files[i],5000)
+                 break
+    except:
+        Root = os.listdir(profile+'/')
+        for r in range(len(Root)):
+            if Wanted in Root[r]:
+                return Root[r]
 
 def resolving_OpenLoad(url):
     #UNDER GNU By Ricardo Boavida (Windows)
@@ -949,10 +980,14 @@ elif mode==19: # Reproduzir
     if addon.getSetting("subtitles") == "true":
         if len(name.split('%')) > 0:
             try:
-                print("My Subs Name are : "+name.split('%')[1])
+                SUBS =name.split('%')[1]
+                if "@" in SUBS:
+                    SUBS = name.split('%')[1].split('@')[1]
+                    SUBS = Series_Subtitles_Engine(SUBS,SUBS,"S01E01")
+                    msgbox(SUBS,5555)
                 from resources.lib import subtitles
                 try: subs = subtitles.getsubtitles(name.split('%')[1],addon.getSetting("sublang1"),addon.getSetting("sublang2"))
-                except:msgbox("Erro a pesquisar legendas",1000)
+                except:subs = SUBS
             except:pass
             if subs !=None:
                 xbmc.sleep(Sleep_Time)
@@ -963,6 +998,7 @@ elif mode == 72: # Construir Items (Séries)
     Episodio=""
     Serie = name
     linkattached=""
+    _A_Tua_Legenda=""
     Split = str(Episodios.decode('utf-8')).split('*')
     for i in range(0,len(Split)):
         if "%" in Split[i]:

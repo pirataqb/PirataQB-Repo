@@ -1,4 +1,4 @@
-﻿********* [COLOR=red]Version[/COLOR] [COLOR=blue]0.2.1[/COLOR] *********
+﻿********* [COLOR=red]Version[/COLOR] [COLOR=blue]0.2.2[/COLOR] *********
 [COLOR=gold]#[/COLOR] Análise de Resolver's avançada              
 [COLOR=gold]#[/COLOR] Procura de Legenda automática             
 [COLOR=gold]#[/COLOR] Resolver de Openload próprio              
