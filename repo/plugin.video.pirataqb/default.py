@@ -82,34 +82,37 @@ OS=os.name
 if "nt" in OS:
     OS = "Windows"
 
+if os.path.isdir(profile) == False:
+    os.mkdir(profile)
 
-if os.path.isdir(profile+'/DUMP') == False:
-    os.mkdir(profile+'/DUMP')
+if os.path.isdir(profile+'DUMP') == False:
+    os.mkdir(profile+'DUMP')
+
 
 if OS == "Windows":
     if len(xbmcplugin.getSetting(int(sys.argv[1]),'ntb')) > 1:
-        if os.path.isfile(profile+'/DUMP/DUMP') == False and "Google Chrome" in Openload_Browser:
+        if os.path.isfile(profile+'\DUMP\DUMP') == False and "Google Chrome" in Openload_Browser:
             dialog = xbmcgui.Dialog()
             ok = dialog.ok('PirataQB '+addon_version, 'Caso não tenha instalado o Browser Predefenido, aconcelhamos que o instale para o bom funcionamento do Script.')
-            file = open(profile+'/DUMP/DUMP', "w")
+            file = open(profile+'\DUMP\DUMP', "w")
             file.write("0")
             file.close()
 
-if os.path.isfile(profile+'/DUMP/WELCOME') == False:
-    file = open(home+'/README.txt', "r")
+if os.path.isfile(profile+'\DUMP\WELCOME') == False:
+    file = open(home+'\README.txt', "r")
     content = file.read()
     dialog = xbmcgui.Dialog()
     ok = dialog.ok('PirataQB '+addon_version,content.decode('utf-8'))
-    file = open(profile+'/DUMP/WELCOME',"w")
+    file = open(profile+'DUMP\WELCOME',"w")
     file.write("0")
     file.close()
 
-if os.path.isfile(profile+'/DUMP/DUMPMSG_V'+addon_version) == False:
-    file = open(home+'/changelog.txt', "r")
+if os.path.isfile(profile+'\DUMP\DUMPMSG_V'+addon_version) == False:
+    file = open(home+'\changelog.txt', "r")
     content = file.read()
     dialog = xbmcgui.Dialog()
     ok = dialog.ok('PirataQB '+addon_version,content.decode('utf-8'))
-    file = open(profile+'/DUMP/DUMPMSG_V'+addon_version, "w")
+    file = open(profile+'\DUMP\DUMPMSG_V'+addon_version, "w")
     file.write("0")
     file.close()
 
@@ -126,13 +129,13 @@ def addon_log(string):
 
 
 def Save_Search(Search):
-    file = open(profile+'/DUMP/SAVE_SEARCH',"w")
+    file = open(profile+'\DUMP\SAVE_SEARCH',"w")
     file.write(Search)
     file.close()
 
 def Load_Search():
-    if os.path.isfile(profile+'/DUMP/SAVE_SEARCH') == True:
-        file = open(profile+'/DUMP/SAVE_SEARCH', "r")
+    if os.path.isfile(profile+'\DUMP\SAVE_SEARCH') == True:
+        file = open(profile+'\DUMP\SAVE_SEARCH', "r")
         content = file.read()
         if len(content) > 0:return content
         else:return ""
@@ -431,7 +434,8 @@ def getSeriesqb(url,pagina):
                 Titulo_Real = Titulo_Real.replace('amp;','')
                 Titulo_Real = Titulo_Real.replace('&','-')
                 Imagem = re.compile('<img src="(.+?)"').findall(Preterit_Info[i])
-                Image = Imagem[0]
+                try:Image = Imagem[0]
+                except:Image = ""
                 linkattached = "plugin://plugin.video.pirataqb/&#mode=72"+"&#iconimage="+Image+"&#name="+Titulo_Real
                 Links_By_Episode = Preterit_Info[i].split('Episódio')
                 for r in range(len(Links_By_Episode)):
