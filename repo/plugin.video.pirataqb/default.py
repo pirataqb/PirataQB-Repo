@@ -25,13 +25,16 @@
 
 ## By Strings but Working =D
 
+
 import urllib
 import urllib2
 import re
 import os
 import xbmcplugin,xbmcgui,xbmc,xbmcaddon,xbmcgui,requests,cookielib
 
-Pirataqb_Host_List = ['http://vidto.me/','http://vidzi.tv/','https://openload.co/','http://videomega.tv/']
+Pirataqb_Host_List = ['http://vidto.me/','http://vidzi.tv/']
+
+# Temp Disable --> ,'https://openload.co/','http://videomega.tv/'
 
 class NoRedirection(urllib2.HTTPErrorProcessor):
    def http_response(self, request, response):

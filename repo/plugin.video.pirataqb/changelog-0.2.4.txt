@@ -1,8 +1,0 @@
-﻿********* [COLOR=red]Version[/COLOR] [COLOR=blue]0.2.3[/COLOR] *********
-[COLOR=gold]#[/COLOR] Análise de Resolver's avançada              
-[COLOR=gold]#[/COLOR] Procura de Legenda automática             
-[COLOR=gold]#[/COLOR] Resolver de Openload próprio              
-[COLOR=gold]#[/COLOR] Pesquisa de páginas em massa              
-[COLOR=gold]#[/COLOR] Pesquisa Avançada
-[COLOR=gold]#[/COLOR] Melhoramento na velocidade de pesquisa
-[COLOR=gold]#[/COLOR] Séries
